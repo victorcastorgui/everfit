@@ -42,14 +42,16 @@ const Login = () => {
 
   const handleSubmitLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    if (
-      data?.find((user) => user.email === email && user.password === password)
-    ) {
+    const user = data?.find(
+      (user) => user.email === email && user.password === password
+    );
+    if (user) {
       setEmail("");
       setPassword("");
+      setCookie("id", user.id.toString(), 30);
+      setCookie("role", user.role, 30);
       setCookie("token", token(), 30);
-      router.push("/home");
+      return router.push("/home");
     }
 
     setShowError(true);
