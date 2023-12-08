@@ -9,7 +9,7 @@ function HomePage() {
         </h3>
         <h4 className="text-[2rem]">- Virgil -</h4>
       </div>
-      <div className="flex flex-col items-center bg-black h-[20rem]">
+      <div className="flex flex-col items-center bg-black h-[20rem] mt-[2rem]">
         <h3 className="text-white text-[2rem] mt-[2rem]">Sponsored By</h3>
         <div className="grid grid-cols-3 bg-white h-[11rem] w-[85%] rounded-[0.5rem] mt-[1rem] content-center place-items-center gap-y-2">
           <Image
