@@ -1,3 +1,5 @@
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 import { Lato } from "next/font/google";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
@@ -15,7 +17,9 @@ export default function Layout({ children }: { children: ReactNode }) {
 
   return (
     <div className={`${lato.className}`}>
+      <Navbar />
       <main>{children}</main>
+      <Footer />
     </div>
   );
 }
