@@ -1,8 +1,9 @@
-import { API_URL } from "@/components/API_URL";
 import AuthRight from "@/components/AuthRight";
 import { useFetch } from "@/hooks/useFetch";
 import * as S from "@/pages/auth/login/style";
 import { User } from "@/types/types";
+import { API_URL } from "@/utils/API_URL";
+import { setCookie } from "@/utils/CheckCookie";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -43,16 +44,16 @@ const Login = () => {
     e.preventDefault();
 
     if (
-      data?.find((user) => user.email !== email && user.password !== password)
+      data?.find((user) => user.email === email && user.password === password)
     ) {
-      setShowError(true);
-      return;
+      setEmail("");
+      setPassword("");
+      setCookie("token", token(), 30);
+      router.push("/home");
     }
 
-    setEmail("");
-    setPassword("");
-    localStorage.setItem("token", token());
-    router.push("/home");
+    setShowError(true);
+    return;
   };
 
   const handleChangeSignUp = () => {
