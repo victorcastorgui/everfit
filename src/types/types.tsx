@@ -35,7 +35,7 @@ export interface Event {
   duration: number;
   category: string;
   price: number;
-  image: string[];
+  image: string;
   description: string;
   capacity: number;
 }
