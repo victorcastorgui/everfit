@@ -3,7 +3,7 @@ import { useFetch } from "@/hooks/useFetch";
 import * as S from "@/pages/auth/login/style";
 import { User } from "@/types/types";
 import { API_URL } from "@/utils/API_URL";
-import { setCookie } from "@/utils/CheckCookie";
+import Cookie from "js-cookie";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -48,9 +48,9 @@ const Login = () => {
     if (user) {
       setEmail("");
       setPassword("");
-      setCookie("id", user.id.toString(), 30);
-      setCookie("role", user.role, 30);
-      setCookie("token", token(), 30);
+      Cookie.set("id", user.id.toString());
+      Cookie.set("role", user.role);
+      Cookie.set("token", token());
       return router.push("/home");
     }
 
