@@ -1,17 +1,24 @@
 /* eslint-disable @next/next/no-img-element */
+import { API_URL } from "@/utils/API_URL";
 import Cookie from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import useSWR from "swr";
 import Logo from "./Logo";
 
 function Navbar() {
   const router = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const tokenExists = Cookie.get("token");
+  const id = Cookie.get("id");
   const redirectProfile = () => {
     router.push("/profile");
   };
+  const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
+  const { data } = useSWR(`${API_URL}/users/${id}`, fetcher);
+
   useEffect(() => {
     if (tokenExists != "") {
       setIsLoggedIn(true);
@@ -28,8 +35,11 @@ function Navbar() {
             <>
               <Link href="/bookmarks">Bookmarks</Link>
               <Link href="/purchasehistory">Purchase History</Link>
-              <div onClick={redirectProfile}>
-                <img src="/images/defaultAvatar.png" alt="avatar" />
+              <div
+                className="rounded-full h-[2.5rem] w-[2.5rem] flex justify-center object-cover"
+                onClick={redirectProfile}
+              >
+                <img src={data?.image} alt="user avatar" />
               </div>
             </>
           ) : (
