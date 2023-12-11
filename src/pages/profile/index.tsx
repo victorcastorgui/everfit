@@ -96,7 +96,7 @@ function Profile() {
       <div className="text-center">
         <PageTitle>Profile Settings</PageTitle>
       </div>
-      <div className="w-[85%] m-auto mt-[2rem] h-[25rem] rounded-[0.5rem] bg-black text-white">
+      <div className="w-[85%] m-auto mt-[2rem] h-[30rem] rounded-[0.5rem] bg-black text-white">
         <div className="flex w-[85%] h-[100%] m-auto justify-between items-center">
           <div className="flex flex-col text-[1]">
             <div className="h-[10rem] w-[10rem] rounded-full object-cover">
@@ -140,7 +140,7 @@ function Profile() {
             <p>ID: {data?.id}</p>
             <p>Name: {data?.name}</p>
             <p>Email: {data?.email}</p>
-            <p>Membership: {data?.membership}</p>
+            <p>Membership: {data?.membership.toUpperCase()}</p>
             <button
               onClick={() => setShowMemberModal(true)}
               className="text-white py-[0.2rem] px-[0.6rem] border-white border-[1px] rounded-[0.5rem]"
