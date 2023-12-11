@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { getCookie } from "@/utils/CheckCookie";
+import Cookie from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -8,12 +8,12 @@ import Logo from "./Logo";
 function Navbar() {
   const router = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const tokenExists = Cookie.get("token");
   const redirectProfile = () => {
     router.push("/profile");
   };
   useEffect(() => {
-    const cookieExists = getCookie("token");
-    if (cookieExists != "") {
+    if (tokenExists != "") {
       setIsLoggedIn(true);
     }
   }, []);
