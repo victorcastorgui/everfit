@@ -1,4 +1,6 @@
+import { useFetch } from "@/hooks/useFetch";
 import { User } from "@/types/types";
+import { API_URL } from "@/utils/API_URL";
 import Image from "next/image";
 import { SetStateAction, useState } from "react";
 import CurrentPlan from "./CurrentPlan";
@@ -10,11 +12,44 @@ function ChangeMembership({
   setShowMemberModal: React.Dispatch<SetStateAction<boolean>>;
   data: User;
 }) {
+  const [currentMembership, setCurrentMembership] = useState(false);
+  const [membership, setMembership] = useState(data?.membership);
   const [success, setSuccess] = useState(false);
+  const { fetchData } = useFetch<User>();
   const handleCloseModal = () => {
     setSuccess(!success);
     setShowMemberModal(false);
   };
+  const handleChangeMembership = () => {
+    let changeMembership = 0;
+    if (membership === "silver") {
+      changeMembership = (data?.balance as number) - 1000;
+    } else if (membership === "gold") {
+      changeMembership = (data?.balance as number) - 5000;
+    } else if (membership === "platinum") {
+      changeMembership = (data?.balance as number) - 10000;
+    }
+
+    const URL = `${API_URL}/users/${data.id}`;
+    const options = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: data.id,
+        name: data?.name,
+        email: data?.email,
+        password: data?.password,
+        role: data?.role,
+        balance: changeMembership,
+        membership: membership,
+        image: data?.image,
+      }),
+    };
+
+    fetchData(URL, options);
+    setSuccess(true);
+  };
+  const hasError = currentMembership;
   return (
     <div
       onClick={() => setShowMemberModal(false)}
@@ -36,11 +71,34 @@ function ChangeMembership({
             <button onClick={handleCloseModal}>Click to close!</button>
           </div>
         ) : (
-          <div>
-            <CurrentPlan data={data} plan={"silver"} />
-            <CurrentPlan data={data} plan={"gold"} />
-            <CurrentPlan data={data} plan={"platinum"} />
-          </div>
+          <>
+            <div className="flex gap-[1rem]">
+              <CurrentPlan
+                setMembership={setMembership}
+                setCurrentMembership={setCurrentMembership}
+                data={data}
+                plan={"silver"}
+                discount={"10%"}
+              />
+              <CurrentPlan
+                setMembership={setMembership}
+                setCurrentMembership={setCurrentMembership}
+                data={data}
+                plan={"gold"}
+                discount={"15%"}
+              />
+              <CurrentPlan
+                setMembership={setMembership}
+                setCurrentMembership={setCurrentMembership}
+                data={data}
+                plan={"platinum"}
+                discount={"20%"}
+              />
+            </div>
+            <button onClick={handleChangeMembership} disabled={hasError}>
+              Update Membership
+            </button>
+          </>
         )}
       </div>
     </div>
