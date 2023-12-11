@@ -6,6 +6,7 @@ import { useFetch } from "@/hooks/useFetch";
 import { User } from "@/types/types";
 import { API_URL } from "@/utils/API_URL";
 import Cookie from "js-cookie";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import useSWR from "swr";
@@ -105,8 +106,28 @@ function Profile() {
                 alt="user profile image"
               />
             </div>
-            <input type="file" onChange={handlePictureChange} />
-            <button onClick={handleUpload}>Upload Picture</button>
+            <div className="flex gap-[1rem] justify-center items-center">
+              <label htmlFor="profile">
+                <Image
+                  src="/icons/upload-profile.png"
+                  alt="upload picture icon"
+                  width={30}
+                  height={30}
+                />
+              </label>
+              <input
+                className="hidden"
+                type="file"
+                id="profile"
+                onChange={handlePictureChange}
+              />
+              <button
+                className="text-white py-[0.2rem] px-[0.6rem] border-white border-[1px] rounded-[0.5rem]"
+                onClick={handleUpload}
+              >
+                Save
+              </button>
+            </div>
             <p>Balance: {data?.balance}</p>
             <button
               onClick={() => setShowTopUpModal(true)}
