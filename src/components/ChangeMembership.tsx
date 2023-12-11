@@ -1,6 +1,7 @@
 import { User } from "@/types/types";
 import Image from "next/image";
 import { SetStateAction, useState } from "react";
+import CurrentPlan from "./CurrentPlan";
 
 function ChangeMembership({
   setShowMemberModal,
@@ -36,11 +37,9 @@ function ChangeMembership({
           </div>
         ) : (
           <div>
-            <div>
-              <p>Silver</p>
-            </div>
-            <div>Gold</div>
-            <div>Platinum</div>
+            <CurrentPlan data={data} plan={"silver"} />
+            <CurrentPlan data={data} plan={"gold"} />
+            <CurrentPlan data={data} plan={"platinum"} />
           </div>
         )}
       </div>
