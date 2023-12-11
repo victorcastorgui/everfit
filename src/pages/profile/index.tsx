@@ -1,12 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
+import ChangeMembership from "@/components/ChangeMembership";
 import PageTitle from "@/components/PageTitle";
 import TopUpModal from "@/components/TopUpModal";
 import { useFetch } from "@/hooks/useFetch";
 import { User } from "@/types/types";
 import { API_URL } from "@/utils/API_URL";
-import { getCookie, removeCookie } from "@/utils/CheckCookie";
+import Cookie from "js-cookie";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import useSWR from "swr";
 
 interface Cloudinary {
   secure_url: string;
@@ -14,20 +16,17 @@ interface Cloudinary {
 
 function Profile() {
   const router = useRouter();
-  const { data, isLoading, fetchData } = useFetch<User>();
   const { fetchData: putFetchData } = useFetch<User>();
   const [selectedPicture, setSelectedPicture] = useState<File | null>(null);
   const [topUpModal, setShowTopUpModal] = useState(false);
+  const [memberModal, setShowMemberModal] = useState(false);
+  const id = Cookie.get("id");
 
-  useEffect(() => {
-    const id = getCookie("id");
-    const URL = `${API_URL}/users/${id}`;
-    const options = {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    };
-    fetchData(URL, options);
-  }, []);
+  const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
+  const { data, isLoading } = useSWR(`${API_URL}/users/${id}`, fetcher, {
+    refreshInterval: 1000,
+  });
 
   if (isLoading) {
     return (
@@ -38,9 +37,9 @@ function Profile() {
   }
 
   const logout = () => {
-    removeCookie("id");
-    removeCookie("token");
-    removeCookie("role");
+    Cookie.remove("id");
+    Cookie.remove("token");
+    Cookie.remove("role");
     router.push("/auth/login");
   };
 
@@ -89,14 +88,6 @@ function Profile() {
       }),
     };
     putFetchData(URL, options);
-
-    const id = getCookie("id");
-    const reFetchURL = `${API_URL}/users/${id}`;
-    const reFetchOptions = {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    };
-    fetchData(reFetchURL, reFetchOptions);
   };
 
   return (
@@ -129,7 +120,10 @@ function Profile() {
             <p>Name: {data?.name}</p>
             <p>Email: {data?.email}</p>
             <p>Membership: {data?.membership}</p>
-            <button className="text-white py-[0.2rem] px-[0.6rem] border-white border-[1px] rounded-[0.5rem]">
+            <button
+              onClick={() => setShowMemberModal(true)}
+              className="text-white py-[0.2rem] px-[0.6rem] border-white border-[1px] rounded-[0.5rem]"
+            >
               Change Membership Plan
             </button>
           </div>
@@ -137,7 +131,15 @@ function Profile() {
       </div>
       <button onClick={logout}>Logout</button>
       {topUpModal ? (
-        <TopUpModal setShowModal={setShowTopUpModal} data={data as User} />
+        <TopUpModal setShowTopUpModal={setShowTopUpModal} data={data as User} />
+      ) : (
+        <></>
+      )}
+      {memberModal ? (
+        <ChangeMembership
+          setShowMemberModal={setShowMemberModal}
+          data={data as User}
+        />
       ) : (
         <></>
       )}
