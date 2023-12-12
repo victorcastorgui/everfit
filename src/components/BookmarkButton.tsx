@@ -26,11 +26,12 @@ function BookmarkButton({
     { refreshInterval: 1000 }
   );
 
-  const bookmarkIndex = data?.findIndex((item) => item.eventId === eventId);
+  const bookmarkId = data?.find((item) => item.eventId === eventId);
 
   const [isBookmarked, setIsBookmarked] = useState<boolean>();
   useEffect(() => {
     setIsBookmarked(data?.some((i) => i.eventId === eventId));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
   const handleBookmark = () => {
     addBookmark(eventId);
@@ -51,7 +52,7 @@ function BookmarkButton({
   };
 
   const handleDeleteBookmark = () => {
-    deleteBookmark(bookmarkIndex as number);
+    deleteBookmark(bookmarkId?.id as number);
     setIsBookmarked(false);
   };
 
