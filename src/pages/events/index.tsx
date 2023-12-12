@@ -26,7 +26,7 @@ function Events() {
       <div className="w-[85%] m-auto mt-[2rem] grid grid-cols-4 gap-x-[2rem] gap-y-[3rem] ">
         {data?.map((item) => (
           <div
-            className="bg-black border-[3px] border-black rounded-[0.5rem] text-white w-[100%] text-center hover:border-[3px] hover:border-white hover:shadow-2xl"
+            className="bg-black border-[3px] border-black rounded-[0.5rem] text-white w-[100%] text-center hover:shadow-2xl"
             key={item.id}
           >
             <div className="h-[15rem] rounded-[0.5rem] object-contain relative">
@@ -44,7 +44,12 @@ function Events() {
               <p className="mt-[0.5rem]">{item.startTime}</p>
               <p className="mt-[0.5rem]">{IDRFormat.format(item.price)}</p>
               <p className="my-[0.5rem] truncate">{item.description}</p>
-              <button onClick={() => handleDetail(item.id)}>Detail</button>
+              <button
+                className="border-[2px] border-white rounded-[0.5rem] w-20 h-10 mb-2 hover:bg-white hover:text-black"
+                onClick={() => handleDetail(item.id)}
+              >
+                Detail
+              </button>
             </div>
           </div>
         ))}
