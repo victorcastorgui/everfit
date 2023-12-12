@@ -7,7 +7,12 @@ export interface User {
   password: string;
   membership?: string;
   balance?: number;
-  bookmarks?: [];
+}
+
+export interface Bookmarks {
+  userId: number;
+  eventId: number;
+  id: number;
 }
 
 export interface Merch {
