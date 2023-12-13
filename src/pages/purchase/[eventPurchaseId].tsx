@@ -21,7 +21,7 @@ function EventPurchaseId() {
   return (
     <div className="flex flex-col items-center mt-8">
       <Stepper currentStep={currentStep} />
-      <div>{displayStep(currentStep)}</div>
+      {displayStep(currentStep)}
       <StepperController
         currentStep={currentStep}
         setCurrentStep={setCurrentStep}
