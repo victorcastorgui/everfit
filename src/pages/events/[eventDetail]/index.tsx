@@ -13,6 +13,9 @@ function DetailPage() {
   const handleBackPage = () => {
     push("/events");
   };
+  const handlePurchase = () => {
+    push(`/purchase/${eventId}`);
+  };
 
   return (
     <div>
@@ -43,7 +46,10 @@ function DetailPage() {
         </div>
       </div>
       <div className="flex w-[85%] m-auto justify-end mt-[2rem]">
-        <button className="bg-black rounded-[0.5rem] p-[0.5rem] text-white">
+        <button
+          onClick={handlePurchase}
+          className="bg-black rounded-[0.5rem] p-[0.5rem] text-white"
+        >
           Buy Ticket
         </button>
       </div>
