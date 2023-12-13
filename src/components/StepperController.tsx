@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { Dispatch, SetStateAction } from "react";
 
 const StepperController = ({
@@ -7,9 +8,13 @@ const StepperController = ({
   currentStep: number;
   setCurrentStep: Dispatch<SetStateAction<number>>;
 }) => {
+  const { push } = useRouter();
+  const handleClose = () => {
+    push("/events");
+  };
   return (
     <div className="flex  justify-end w-[85%] m-auto gap-3">
-      {currentStep === 1 ? (
+      {currentStep === 1 || currentStep === 3 ? (
         <></>
       ) : (
         <button
@@ -20,16 +25,30 @@ const StepperController = ({
         </button>
       )}
       {currentStep === 3 ? (
-        <button className="rounded-[0.5rem] bg-black border-[2px] border-black text-white hover:border-[2px] hover:text-black hover:bg-white text-[1.3rem] w-28 h-10">
-          Confirm
+        <button
+          onClick={handleClose}
+          className="rounded-[0.5rem] bg-black border-[2px] border-black text-white hover:border-[2px] hover:text-black hover:bg-white text-[1.3rem] w-28 h-10"
+        >
+          Close
         </button>
       ) : (
-        <button
-          className="rounded-[0.5rem] bg-black border-[2px] border-black text-white hover:border-[2px] hover:text-black hover:bg-white text-[1.3rem] w-28 h-10"
-          onClick={() => setCurrentStep(currentStep + 1)}
-        >
-          Next
-        </button>
+        <>
+          {currentStep === 1 ? (
+            <button
+              className="rounded-[0.5rem] bg-black border-[2px] border-black text-white hover:border-[2px] hover:text-black hover:bg-white text-[1.3rem] w-28 h-10"
+              onClick={() => setCurrentStep(currentStep + 1)}
+            >
+              Next
+            </button>
+          ) : (
+            <button
+              className="rounded-[0.5rem] bg-black border-[2px] border-black text-white hover:border-[2px] hover:text-black hover:bg-white text-[1.3rem] w-28 h-10"
+              onClick={() => setCurrentStep(currentStep + 1)}
+            >
+              Confirm
+            </button>
+          )}
+        </>
       )}
     </div>
   );
