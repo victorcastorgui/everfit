@@ -35,7 +35,7 @@ function Navbar() {
           {isLoggedIn ? (
             <>
               <Link href="/bookmarks">Bookmarks</Link>
-              <Link href="/purchasehistory">Purchase History</Link>
+              <Link href="/history">Purchase History</Link>
               <div
                 className="rounded-full h-[2.5rem] w-[2.5rem] flex justify-center object-cover"
                 onClick={redirectProfile}
