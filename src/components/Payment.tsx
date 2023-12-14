@@ -57,6 +57,7 @@ const Payment = ({
       setPurchaseData((prevPurchaseData) => ({
         ...prevPurchaseData,
         paymentTotal: grandTotal,
+        discount: discount,
       }));
     }
   }, [grandTotal]);
