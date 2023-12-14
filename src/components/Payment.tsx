@@ -143,7 +143,7 @@ const Payment = ({
           </div>
         </div>
       </div>
-      <div className="w-[85%] m-auto bg-white rounded-[0.5rem] p-[1.5rem]">
+      <div className="w-[85%] m-auto bg-white rounded-[0.5rem] p-[1.5rem] mb-[2rem]">
         <PaymentCategory>Payment Method</PaymentCategory>
         <div>
           <div>
