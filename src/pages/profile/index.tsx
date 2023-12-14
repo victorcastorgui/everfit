@@ -75,16 +75,9 @@ function Profile() {
   const updateJsonServer = async (userId: number, link: string) => {
     const URL = `${API_URL}/users/${userId}`;
     const options = {
-      method: "PUT",
+      method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        id: userId,
-        name: data?.name,
-        email: data?.email,
-        password: data?.password,
-        role: data?.role,
-        balance: data?.balance,
-        membership: data?.membership,
         image: link,
       }),
     };
