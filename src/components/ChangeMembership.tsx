@@ -32,17 +32,11 @@ function ChangeMembership({
 
     const URL = `${API_URL}/users/${data.id}`;
     const options = {
-      method: "PUT",
+      method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        id: data.id,
-        name: data?.name,
-        email: data?.email,
-        password: data?.password,
-        role: data?.role,
         balance: changeMembership,
         membership: membership,
-        image: data?.image,
       }),
     };
 
