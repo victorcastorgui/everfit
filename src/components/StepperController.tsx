@@ -4,9 +4,13 @@ import { Dispatch, SetStateAction } from "react";
 const StepperController = ({
   currentStep,
   setCurrentStep,
+  handleBuyEvent,
+  disable,
 }: {
   currentStep: number;
   setCurrentStep: Dispatch<SetStateAction<number>>;
+  handleBuyEvent: () => void;
+  disable: boolean;
 }) => {
   const { push } = useRouter();
   const handleClose = () => {
@@ -43,7 +47,11 @@ const StepperController = ({
           ) : (
             <button
               className="rounded-[0.5rem] bg-black border-[2px] border-black text-white hover:border-[2px] hover:text-black hover:bg-white text-[1.3rem] w-28 h-10"
-              onClick={() => setCurrentStep(currentStep + 1)}
+              onClick={() => {
+                handleBuyEvent;
+                setCurrentStep(currentStep + 1);
+              }}
+              disabled={disable}
             >
               Confirm
             </button>
