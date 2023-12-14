@@ -16,6 +16,11 @@ const StepperController = ({
   const handleClose = () => {
     push("/events");
   };
+
+  const handleTransaction = () => {
+    handleBuyEvent();
+    setCurrentStep(currentStep + 1);
+  };
   return (
     <div className="flex  justify-end w-[85%] m-auto gap-3">
       {currentStep === 1 || currentStep === 3 ? (
@@ -47,10 +52,7 @@ const StepperController = ({
           ) : (
             <button
               className="rounded-[0.5rem] bg-black border-[2px] border-black text-white hover:border-[2px] hover:text-black hover:bg-white text-[1.3rem] w-28 h-10"
-              onClick={() => {
-                handleBuyEvent;
-                setCurrentStep(currentStep + 1);
-              }}
+              onClick={handleTransaction}
               disabled={disable}
             >
               Confirm
