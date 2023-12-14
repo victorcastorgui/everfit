@@ -20,10 +20,12 @@ function Navbar() {
   const { data } = useSWR(`${API_URL}/users/${id}`, fetcher);
 
   useEffect(() => {
-    if (tokenExists != "") {
+    if (tokenExists) {
       setIsLoggedIn(true);
     }
   }, []);
+  console.log(isLoggedIn);
+
   return (
     <div className="bg-black py-3">
       <div className="flex justify-between w-[85%] m-auto">
@@ -44,10 +46,16 @@ function Navbar() {
             </>
           ) : (
             <>
-              <button className="bg-white text-black py-[0.2rem] px-[0.3rem] rounded-[0.5rem]">
+              <button
+                onClick={() => router.push("/auth/signup")}
+                className="bg-white text-black py-[0.2rem] px-[0.3rem] rounded-[0.5rem]"
+              >
                 Sign Up
               </button>
-              <button className="text-white py-[0.2rem] px-[0.6rem] border-white border-[1px] rounded-[0.5rem]">
+              <button
+                onClick={() => router.push("/auth/login")}
+                className="text-white py-[0.2rem] px-[0.6rem] border-white border-[1px] rounded-[0.5rem]"
+              >
                 Login
               </button>
             </>
