@@ -33,6 +33,7 @@ export interface Purchase {
   merchs: Merch[];
   paymentStatus: boolean;
   paymentTotal: number;
+  discount: number;
 }
 
 export interface Event {
