@@ -46,17 +46,10 @@ function TopUpModal({
 
     const URL = `${API_URL}/users/${data.id}`;
     const options = {
-      method: "PUT",
+      method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        id: data.id,
-        name: data?.name,
-        email: data?.email,
-        password: data?.password,
-        role: data?.role,
         balance: updateBalance,
-        membership: data?.membership,
-        image: data.image,
       }),
     };
 
@@ -98,7 +91,7 @@ function TopUpModal({
               Select an option:
             </label>
             <select
-              id="countries"
+              id="source"
               className="border-[2px] h-[3rem] border-black text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5"
             >
               <option selected>Source of funds</option>
