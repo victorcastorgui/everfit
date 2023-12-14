@@ -22,16 +22,17 @@ export interface Merch {
   name: string;
   image: string;
   eventId: number;
-  stock: number;
+  stock?: number;
+  qty: number;
 }
 
 export interface Purchase {
-  id: number;
   userId: number;
   eventId: number;
-  purchaseDate: string;
-  merchList: Merch[];
+  purchaseDate: Date;
+  merchs: Merch[];
   paymentStatus: boolean;
+  paymentTotal: number;
 }
 
 export interface Event {
