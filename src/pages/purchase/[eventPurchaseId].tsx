@@ -3,23 +3,29 @@ import Merchandise from "@/components/Merchandise";
 import Payment from "@/components/Payment";
 import Stepper from "@/components/Stepper";
 import StepperController from "@/components/StepperController";
+import { useFetch } from "@/hooks/useFetch";
 import { Purchase } from "@/types/types";
+import { API_URL } from "@/utils/API_URL";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import useSWR from "swr";
 
 function EventPurchaseId() {
+  const [disable, setDisable] = useState(true);
   const [currentStep, setCurrentStep] = useState(1);
   const userId = Cookies.get("id");
   const { query } = useRouter();
+  const { fetchData } = useFetch<Purchase>();
   const eventId = parseInt(query.eventPurchaseId as string);
-  console.log(eventId);
+  const fetcher = (url: string) => fetch(url).then((res) => res.json());
+  const { data: userData } = useSWR(`${API_URL}/users/${userId}`, fetcher);
   const [purchaseData, setPurchaseData] = useState<Purchase>({
     paymentTotal: 0,
     eventId: eventId,
     purchaseDate: new Date(),
     merchs: [],
-    paymentStatus: false,
+    paymentStatus: true,
     userId: parseInt(userId as string),
   });
 
@@ -28,6 +34,28 @@ function EventPurchaseId() {
       setPurchaseData((prevPurchaseData) => ({ ...prevPurchaseData, eventId }));
     }
   }, [eventId]);
+
+  const handleBuyEvent = () => {
+    const URL = `${API_URL}/purchases`;
+    const options = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(purchaseData),
+    };
+    fetchData(URL, options);
+
+    const newBalance = userData.balance - purchaseData.paymentTotal;
+
+    const UserBalanceUpdateURL = `${API_URL}/users/${userId}`;
+    const userUpdateOptions = {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        balance: newBalance,
+      }),
+    };
+    fetchData(UserBalanceUpdateURL, userUpdateOptions);
+  };
 
   const displayStep = (step: number) => {
     switch (step) {
@@ -40,13 +68,19 @@ function EventPurchaseId() {
           />
         );
       case 2:
-        return <Payment purchaseData={purchaseData} eventId={eventId} />;
+        return (
+          <Payment
+            purchaseData={purchaseData}
+            eventId={eventId}
+            setDisable={setDisable}
+            setPurchaseData={setPurchaseData}
+          />
+        );
       case 3:
         return <Complete />;
       default:
     }
   };
-  console.log(purchaseData);
   return (
     <div className="flex flex-col items-center mt-8">
       <Stepper currentStep={currentStep} />
@@ -54,6 +88,8 @@ function EventPurchaseId() {
       <StepperController
         currentStep={currentStep}
         setCurrentStep={setCurrentStep}
+        handleBuyEvent={handleBuyEvent}
+        disable={disable}
       />
     </div>
   );
