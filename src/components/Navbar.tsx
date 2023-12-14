@@ -24,7 +24,6 @@ function Navbar() {
       setIsLoggedIn(true);
     }
   }, []);
-  console.log(isLoggedIn);
 
   return (
     <div className="bg-black py-3">
