@@ -1,14 +1,20 @@
-import { Merch } from "@/types/types";
+import { Merch, Purchase } from "@/types/types";
 import { API_URL } from "@/utils/API_URL";
 import { IDRFormat } from "@/utils/IDRFormat";
-import { useRouter } from "next/router";
+import { Dispatch, SetStateAction } from "react";
 import useSWR from "swr";
 import QtyButton from "./QtyButton";
 
 /* eslint-disable @next/next/no-img-element */
-function Merchandise() {
-  const { query } = useRouter();
-  const eventId = query.eventPurchaseId;
+function Merchandise({
+  purchaseData,
+  setPurchaseData,
+  eventId,
+}: {
+  purchaseData: Purchase;
+  setPurchaseData: Dispatch<SetStateAction<Purchase>>;
+  eventId: number;
+}) {
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
   const { data } = useSWR<Merch[]>(
     `${API_URL}/merchs?eventId=${eventId}`,
@@ -32,7 +38,11 @@ function Merchandise() {
               <h3>{IDRFormat.format(item.price)}</h3>
               <p>{item.name}</p>
               <p>{item.desc}</p>
-              <QtyButton stock={item.stock} />
+              <QtyButton
+                setPurchaseData={setPurchaseData}
+                purchaseData={purchaseData}
+                item={item}
+              />
             </div>
           ))}
         </div>
