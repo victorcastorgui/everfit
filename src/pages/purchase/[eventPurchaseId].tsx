@@ -17,6 +17,7 @@ function EventPurchaseId() {
   const userId = Cookies.get("id");
   const { query } = useRouter();
   const { fetchData } = useFetch<Purchase>();
+  const { fetchData: patchUserData } = useFetch<Purchase>();
   const eventId = parseInt(query.eventPurchaseId as string);
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
   const { data: userData } = useSWR(`${API_URL}/users/${userId}`, fetcher);
@@ -26,6 +27,7 @@ function EventPurchaseId() {
     purchaseDate: new Date(),
     merchs: [],
     paymentStatus: true,
+    discount: 0,
     userId: parseInt(userId as string),
   });
 
@@ -54,7 +56,7 @@ function EventPurchaseId() {
         balance: newBalance,
       }),
     };
-    fetchData(UserBalanceUpdateURL, userUpdateOptions);
+    patchUserData(UserBalanceUpdateURL, userUpdateOptions);
   };
 
   const displayStep = (step: number) => {
