@@ -2,6 +2,7 @@
 import { Event, Merch } from "@/types/types";
 import { API_URL } from "@/utils/API_URL";
 import { IDRFormat } from "@/utils/IDRFormat";
+import router from "next/router";
 import useSWR from "swr";
 
 interface PurchaseHistory {
@@ -22,13 +23,17 @@ function History() {
     `${API_URL}/purchases?userId=3&&_expand=event`,
     fetcher
   );
-  console.log(data);
+
+  const handleDetail = (id: number) => {
+    router.push(`/history/${id}`);
+  };
 
   return (
     <div className="w-[85%] m-auto mt-[2rem]">
       <h2 className="text-center text-[2rem]">Purchase History</h2>
       {data?.map((item) => (
         <div
+          onClick={() => handleDetail(item.id)}
           className="bg-black text-white mt-[2rem] grid grid-cols-3 rounded-[0.5rem] p-[1rem] text-[1.2rem] items-center place-items-center"
           key={item.id}
         >
@@ -38,15 +43,6 @@ function History() {
           <div>
             <h3>{item.event.name}</h3>
             <p>{IDRFormat.format(item.event.price)}</p>
-            {item.merchs.map((merch) => (
-              <div key={merch.id}>
-                <h4>{merch.name}</h4>
-                <p>
-                  <span>{merch.qty}x </span>
-                  {IDRFormat.format(merch.price)}
-                </p>
-              </div>
-            ))}
           </div>
           <div>
             <p>Discount: {item.discount}%</p>
