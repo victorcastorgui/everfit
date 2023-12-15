@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import BackPage from "@/components/BackPage";
 import PageTitle from "@/components/PageTitle";
 import { API_URL } from "@/utils/API_URL";
 import { IDRFormat } from "@/utils/IDRFormat";
@@ -20,9 +21,7 @@ function DetailPage() {
   return (
     <div>
       <div className="flex justify-between items-center w-[85%] m-auto">
-        <p onClick={handleBackPage} className="mt-[2rem]">
-          {"< Back"}
-        </p>
+        <BackPage props={handleBackPage} />
         <PageTitle>{data?.name}</PageTitle>
         <br />
       </div>
