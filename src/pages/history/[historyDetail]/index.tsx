@@ -1,13 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
-// {item.merchs.map((merch) => (
-//     <div key={merch.id}>
-//       <h4>{merch.name}</h4>
-//       <p>
-//         <span>{merch.qty}x </span>
-//         {IDRFormat.format(merch.price)}
-//       </p>
-//     </div>
-//   ))}
+import BackPage from "@/components/BackPage";
 import PageTitle from "@/components/PageTitle";
 import { Event, Merch } from "@/types/types";
 import { API_URL } from "@/utils/API_URL";
@@ -40,11 +31,9 @@ function HistoryDetail() {
     push("/history");
   };
   return (
-    <div>
+    <div className="min-h-[65vh]">
       <div className="flex justify-between items-center w-[85%] m-auto">
-        <p onClick={handleBackPage} className="mt-[2rem]">
-          {"< Back"}
-        </p>
+        <BackPage props={handleBackPage} />
         <PageTitle>Order Detail</PageTitle>
         <br />
       </div>
