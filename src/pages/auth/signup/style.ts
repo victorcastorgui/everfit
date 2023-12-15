@@ -53,6 +53,7 @@ export const FormInput = styled.input`
   padding: 0.75rem;
   border-radius: 0.3125rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: white;
 `;
 export const FormError = styled.p`
   color: red;
