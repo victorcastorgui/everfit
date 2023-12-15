@@ -27,7 +27,7 @@ function Navbar() {
     if (tokenExists) {
       setIsLoggedIn(true);
     }
-  }, []);
+  }, [tokenExists]);
 
   return (
     <nav className="bg-black py-3">
