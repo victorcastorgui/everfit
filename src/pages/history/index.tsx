@@ -29,12 +29,12 @@ function History() {
   };
 
   return (
-    <div className="w-[85%] m-auto mt-[2rem]">
+    <div className="w-[85%] m-auto mt-[2rem] min-h-[60vh]">
       <h2 className="text-center text-[2rem]">Purchase History</h2>
       {data?.map((item) => (
         <div
           onClick={() => handleDetail(item.id)}
-          className="bg-black text-white mt-[2rem] grid grid-cols-3 rounded-[0.5rem] p-[1rem] text-[1.2rem] items-center place-items-center"
+          className="cursor-pointer bg-black text-white mt-[2rem] grid grid-cols-3 rounded-[0.5rem] p-[1rem] text-[1.2rem] items-center place-items-center"
           key={item.id}
         >
           <div className="overflow-hidden object-cover rounded-[0.5rem] h-[11rem] w-[19rem]">
