@@ -11,7 +11,7 @@ function TopUpModal({
   setShowTopUpModal: React.Dispatch<SetStateAction<boolean>>;
   data: User;
 }) {
-  const { isLoading, fetchData } = useFetch<User>();
+  const { fetchData } = useFetch<User>();
   const [amount, setAmount] = useState("");
   const [pin, setPin] = useState("");
   const [success, setSuccess] = useState(false);
@@ -19,7 +19,11 @@ function TopUpModal({
   const [showPinErr, setShowPinErr] = useState(false);
 
   useEffect(() => {
-    if (parseInt(amount) < 10000 || parseInt(amount) > 10000000) {
+    if (
+      parseInt(amount) < 10000 ||
+      parseInt(amount) > 10000000 ||
+      amount.length === 0
+    ) {
       setShowAmountErr(true);
     } else {
       setShowAmountErr(false);
@@ -92,7 +96,7 @@ function TopUpModal({
             </label>
             <select
               id="source"
-              className="border-[2px] h-[3rem] border-black text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5"
+              className="bg-white border-[2px] h-[3rem] border-black text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5"
             >
               <option selected>Source of funds</option>
               <option value="gopay">GoPay</option>
@@ -106,7 +110,7 @@ function TopUpModal({
               Amount:
             </label>
             <input
-              className="px-[1rem] h-[3rem] [-moz-appearance:_textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none border-black border-[2px] rounded-[0.5rem]"
+              className="bg-white px-[1rem] h-[3rem] [-moz-appearance:_textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none border-black border-[2px] rounded-[0.5rem]"
               onChange={(e) => setAmount(e.target.value)}
               type="number"
               placeholder="Enter amount here..."
@@ -124,9 +128,9 @@ function TopUpModal({
               Pin:
             </label>
             <input
-              className="px-[1rem] h-[3rem] [-moz-appearance:_textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none  border-black border-[2px] rounded-[0.5rem]"
+              className="bg-white px-[1rem] h-[3rem] [-moz-appearance:_textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none  border-black border-[2px] rounded-[0.5rem]"
               onChange={(e) => setPin(e.target.value)}
-              type="number"
+              type="password"
               placeholder="Enter pin here..."
             />
             {showPinErr ? (
