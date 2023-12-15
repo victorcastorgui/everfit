@@ -28,13 +28,13 @@ function DetailPage() {
       </div>
       <div className="bg-black rounded-[0.5rem] mt-[2rem] w-[85%] m-auto p-[1rem]">
         <div className="w-[80%] m-auto text-white">
-          <div className="flex justify-between">
+          <div className="max-[800px]:flex-col max-[800px]:items-center flex justify-between">
             <img
-              className="rounded-[0.5rem] w-[50%]"
+              className="rounded-[0.5rem] w-[50%] max-[800px]:w-[100%]"
               src={data?.image}
               alt="event image"
             />
-            <div className="text-[1.5rem]">
+            <div className="max-[800px]:mt-[1rem] max-[600px]:text-[1rem] text-[1.5rem]">
               <p>Start time: {data?.startTime}</p>
               <p>Duration: {data?.duration}</p>
               <p>Category: {data?.category}</p>
@@ -42,7 +42,9 @@ function DetailPage() {
               <p>Capacity: {data?.capacity}</p>
             </div>
           </div>
-          <p className="mt-[1rem] text-[1.5rem]">{data?.description}</p>
+          <p className="max-[600px]:text-[1rem] mt-[1rem] text-[1.5rem]">
+            {data?.description}
+          </p>
         </div>
       </div>
       <div className="flex w-[85%] m-auto justify-end mt-[2rem]">
