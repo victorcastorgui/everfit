@@ -89,17 +89,17 @@ function Profile() {
       <div className="text-center">
         <PageTitle>Profile Settings</PageTitle>
       </div>
-      <div className="w-[85%] m-auto mt-[2rem] h-[30rem] rounded-[0.5rem] bg-black text-white">
-        <div className="flex w-[85%] h-[100%] m-auto justify-between items-center">
-          <div className="flex flex-col text-[1]">
-            <div className="h-[10rem] w-[10rem] rounded-full object-cover">
+      <div className="w-[85%] max-w-[60rem] m-auto mt-[2rem] min-[800px]:h-[30rem] rounded-[0.5rem] bg-black text-white">
+        <div className="max-[800px]:py-[2rem] max-[800px]:flex-col flex w-[85%] h-[100%] m-auto justify-between items-center">
+          <div className="flex flex-col">
+            <div className="h-[16rem] w-[16rem] rounded-full object-cover">
               <img
                 src={data?.image}
                 className="h-[100%] w-[100%]"
                 alt="user profile image"
               />
             </div>
-            <div className="flex gap-[1rem] justify-center items-center">
+            <div className="flex gap-[1rem] mt-[1rem] justify-center items-center">
               <label htmlFor="profile">
                 <Image
                   src="/icons/upload-profile.png"
@@ -121,29 +121,38 @@ function Profile() {
                 Save
               </button>
             </div>
-            <p>Balance: {data?.balance}</p>
+            <p className="mt-[1rem] text-center text-[1.5rem]">
+              Balance: {data?.balance}
+            </p>
             <button
               onClick={() => setShowTopUpModal(true)}
-              className="text-white py-[0.2rem] px-[0.6rem] border-white border-[1px] rounded-[0.5rem]"
+              className="mt-[1rem] text-[1.3rem] text-white py-[0.2rem] px-[0.6rem] border-white border-[1px] rounded-[0.5rem]"
             >
               Top Up
             </button>
           </div>
-          <div className="text-[1]">
+          <div className="max-[800px]:pt-[1rem] flex flex-col gap-[1rem] text-[1.5rem]">
             <p>ID: {data?.id}</p>
             <p>Name: {data?.name}</p>
             <p>Email: {data?.email}</p>
             <p>Membership: {data?.membership.toUpperCase()}</p>
             <button
               onClick={() => setShowMemberModal(true)}
-              className="text-white py-[0.2rem] px-[0.6rem] border-white border-[1px] rounded-[0.5rem]"
+              className="text-[1.3rem] text-white py-[0.2rem] px-[0.6rem] border-white border-[1px] rounded-[0.5rem]"
             >
               Change Membership Plan
             </button>
           </div>
         </div>
       </div>
-      <button onClick={logout}>Logout</button>
+      <div className="flex w-[85%] m-auto justify-center text-[1.3rem] mt-[2rem]">
+        <button
+          onClick={logout}
+          className="bg-black rounded-[0.5rem] p-[0.5rem] text-white"
+        >
+          Logout
+        </button>
+      </div>
       {topUpModal ? (
         <TopUpModal setShowTopUpModal={setShowTopUpModal} data={data as User} />
       ) : (
