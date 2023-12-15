@@ -2,9 +2,11 @@ import { Event, Purchase, User } from "@/types/types";
 import { API_URL } from "@/utils/API_URL";
 import { IDRFormat } from "@/utils/IDRFormat";
 import Cookies from "js-cookie";
+import Image from "next/image";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import useSWR from "swr";
 import PaymentCategory from "./PaymentCategory";
+import PaymentMethod from "./PaymentMethod";
 
 const Payment = ({
   purchaseData,
@@ -94,7 +96,7 @@ const Payment = ({
   const hasError = showError;
   return (
     <>
-      <div className="w-[85%] m-auto flex gap-[2rem] mt-[2rem] mb-[2rem]">
+      <div className="max-[600px]:flex-col w-[85%] m-auto flex gap-[2rem] mt-[2rem] mb-[2rem]">
         <div className="bg-white w-full rounded-[0.5rem] p-[1.5rem]">
           <PaymentCategory>Order Detail</PaymentCategory>
           <div className="flex justify-between">
@@ -146,8 +148,8 @@ const Payment = ({
       </div>
       <div className="w-[85%] m-auto bg-white rounded-[0.5rem] p-[1.5rem] mb-[2rem]">
         <PaymentCategory>Payment Method</PaymentCategory>
-        <div>
-          <div>
+        <div className="grid grid-cols-3 max-[600px]:grid-cols-2 max-[400px]:grid-cols-1 place-items-center gap-y-3">
+          <div className="flex gap-1">
             <input
               onClick={() => {
                 if ((userData?.balance as number) >= grandTotal) {
@@ -159,7 +161,15 @@ const Payment = ({
               name="card"
               disabled={hasError}
             />
-            <label htmlFor="balance">Your balance: {userData?.balance}</label>
+            <label className="flex gap-1 items-center" htmlFor="balance">
+              <Image
+                src="/icons/wallet.png"
+                alt="wallet icon"
+                width={40}
+                height={40}
+              />
+              {IDRFormat.format(userData?.balance as number)}
+            </label>
             {showError ? (
               <p className="text-red-500">
                 Balance is not enough, top up first
@@ -168,12 +178,11 @@ const Payment = ({
               <></>
             )}
           </div>
-          <input type="radio" id="visa" name="card" disabled />
-          <label htmlFor="visa">Visa</label>
-          <input type="radio" id="mastercard" name="card" disabled />
-          <label htmlFor="mastercard">Mastercard</label>
-          <input type="radio" id="jago" name="card" disabled />
-          <label htmlFor="jago">Jago</label>
+          <PaymentMethod>visa</PaymentMethod>
+          <PaymentMethod>mastercard</PaymentMethod>
+          <PaymentMethod>paypal</PaymentMethod>
+          <PaymentMethod>stripe</PaymentMethod>
+          <PaymentMethod>discover</PaymentMethod>
         </div>
       </div>
     </>
