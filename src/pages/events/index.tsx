@@ -23,7 +23,7 @@ function Events() {
       <div className="text-center">
         <PageTitle>Events</PageTitle>
       </div>
-      <div className="w-[85%] m-auto mt-[2rem] grid grid-cols-4 gap-x-[2rem] gap-y-[3rem] ">
+      <div className="w-[85%] m-auto mt-[2rem] grid grid-cols-4 max-[1200px]:grid-cols-3 max-[800px]:grid-cols-2 max-[600px]:grid-cols-1 gap-x-[2rem] gap-y-[3rem] ">
         {data?.map((item) => (
           <div
             className="bg-black border-[3px] border-black rounded-[0.5rem] text-white w-[100%] text-center hover:shadow-2xl"
