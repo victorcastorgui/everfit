@@ -46,26 +46,25 @@ function Bookmarks() {
         <div className="text-center">
           <PageTitle>Bookmarks</PageTitle>
         </div>
-        <div className="w-[85%] m-auto bg-black rounded-[0.5rem] mt-[2rem] text-white p-[2rem]">
+        <div className="w-[85%] m-auto rounded-[0.5rem] mt-[2rem] text-white p-[2rem]">
           {isEmpty ? (
             <p>Bookmarks is empty</p>
           ) : (
             <div className="flex flex-col gap-5">
               {data?.map((item) => (
                 <div
-                  className="border-[2px] rounded-[0.5rem] border-white grid p-[1rem] justify-between items-center grid-cols-3 gap-10 place-items-center"
+                  className="border-[2px] rounded-[0.5rem] bg-black grid p-[1rem] justify-between items-center max-[800px]:gap-8 max-[800px]:grid-cols-1 grid-cols-[2fr_1fr_1fr] gap-10 place-items-center"
                   key={item.id}
                 >
-                  <div className="rounded-[0.5rem] w-[23rem] h-[15rem] object-cover bg-white overflow-hidden">
+                  <div className="rounded-[0.5rem] w-[100%] h-[15rem] object-cover bg-white overflow-hidden">
                     <img
                       className="h-[100%] w-[100%]"
                       src={item.event.image}
                       alt="event image"
                     />
                   </div>
-                  <div className="flex flex-col gap-[1rem] text-[1rem]">
+                  <div className="flex flex-col gap-[1rem] text-[1rem] text-center">
                     <p className="text-[1.3rem]">{item.event.name}</p>
-                    <p>{item.event.description}</p>
                     <p>
                       <b>{IDRFormat.format(item.event.price)}</b>
                     </p>
