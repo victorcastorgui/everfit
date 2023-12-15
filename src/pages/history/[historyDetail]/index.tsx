@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import BackPage from "@/components/BackPage";
 import PageTitle from "@/components/PageTitle";
 import { Event, Merch } from "@/types/types";
@@ -40,9 +41,9 @@ function HistoryDetail() {
       {data?.map((item) => (
         <div
           key={item.id}
-          className="grid grid-cols-3 bg-black rounded-[0.5rem] w-[85%] m-auto mt-[2rem] text-white mb-[2rem] p-[1rem]"
+          className="max-[800px]:grid-cols-1 grid grid-cols-3 bg-black rounded-[0.5rem] w-[85%] m-auto mt-[2rem] text-white mb-[2rem] p-[1rem] gap-[1rem] items-center"
         >
-          <div className="overflow-hidden object-cover rounded-[0.5rem] h-[11rem] w-[19rem]">
+          <div className="overflow-hidden object-cover rounded-[0.5rem] max-[800px]:h-[100%] h-[11rem] w-[100%]">
             <img src={item.event.image} alt="event image" />
           </div>
           <div>
@@ -61,7 +62,7 @@ function HistoryDetail() {
               </div>
             ))}
             <p>Discount: {item.discount}%</p>
-            <p>
+            <p className="text-end">
               Total Price:{" "}
               <span className="text-[1.5rem]">
                 {IDRFormat.format(item.paymentTotal)}
