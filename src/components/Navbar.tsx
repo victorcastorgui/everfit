@@ -51,7 +51,7 @@ function Navbar() {
               <Link href="/bookmarks">Bookmarks</Link>
               <Link href="/history">Purchase History</Link>
               <div
-                className="rounded-full h-[2.5rem] w-[2.5rem] flex justify-center object-cover"
+                className="rounded-full h-[2.5rem] w-[2.5rem] flex justify-center object-cover cursor-pointer"
                 onClick={redirectProfile}
               >
                 <img src={data?.image} alt="user avatar" />
