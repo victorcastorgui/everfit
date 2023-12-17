@@ -70,14 +70,22 @@ function BookmarkButton({
           className="bg-white rounded-[0.5rem] absolute top-0 left-1"
           onClick={handleDeleteBookmark}
         >
-          <img src="/icons/bookmarked.svg" alt="bookmark icon" />
+          <img
+            className="w-[40px]"
+            src="/icons/bookmarked.svg"
+            alt="bookmark icon"
+          />
         </button>
       ) : (
         <button
           className="bg-white rounded-[0.5rem] absolute top-0 left-1"
           onClick={handleBookmark}
         >
-          <img src="/icons/bookmark.svg" alt="bookmark icon" />
+          <img
+            className="w-[40px]"
+            src="/icons/bookmark.svg"
+            alt="bookmark icon"
+          />
         </button>
       )}
     </>
