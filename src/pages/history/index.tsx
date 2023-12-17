@@ -2,6 +2,7 @@
 import { Event, Merch } from "@/types/types";
 import { API_URL } from "@/utils/API_URL";
 import { IDRFormat } from "@/utils/IDRFormat";
+import Cookies from "js-cookie";
 import router from "next/router";
 import useSWR from "swr";
 
@@ -19,10 +20,12 @@ interface PurchaseHistory {
 
 function History() {
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
+  const userId = Cookies.get("id");
   const { data } = useSWR<PurchaseHistory[]>(
-    `${API_URL}/purchases?userId=3&&_expand=event`,
+    `${API_URL}/purchases?userId=${userId}&&_expand=event`,
     fetcher
   );
+  console.log(data);
 
   const handleDetail = (id: number) => {
     router.push(`/history/${id}`);
