@@ -27,7 +27,6 @@ function HistoryDetail() {
     `${API_URL}/purchases/?id=${orderId}&&_expand=event`,
     fetcher
   );
-  console.log(data);
   const handleBackPage = () => {
     push("/history");
   };
