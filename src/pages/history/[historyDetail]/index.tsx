@@ -6,6 +6,7 @@ import { API_URL } from "@/utils/API_URL";
 import { IDRFormat } from "@/utils/IDRFormat";
 import { useRouter } from "next/router";
 import useSWR from "swr";
+import Cookies from "js-cookie";
 
 interface PurchaseHistory {
   id: number;
@@ -22,9 +23,10 @@ interface PurchaseHistory {
 function HistoryDetail() {
   const { push, query } = useRouter();
   const orderId = query.historyDetail;
+  const userId = Cookies.get("id");
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
   const { data } = useSWR<PurchaseHistory[]>(
-    `${API_URL}/purchases/?id=${orderId}&&_expand=event`,
+    `${API_URL}/purchases/?id=${orderId}&&_expand=event&&userId=${userId}`,
     fetcher
   );
   const handleBackPage = () => {
