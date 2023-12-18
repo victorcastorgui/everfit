@@ -15,7 +15,6 @@ function User() {
   );
   const { push } = useRouter();
   const { fetchData } = useFetch();
-  console.log(data);
   const handleEditUser = (id: number) => {
     push(`/users/${id}`);
   };
@@ -23,7 +22,7 @@ function User() {
   const handleDeleteUser = (id: number) => {
     const URL = `${API_URL}/users/${id}`;
     const options = {
-      method: "DELETE",
+      method: "DELETE"
     };
     fetchData(URL, options);
   };
