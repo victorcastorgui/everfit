@@ -13,6 +13,9 @@ function UserEdit() {
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
   const { data } = useSWR<User>(`${API_URL}/users/${userId}`, fetcher);
   const { fetchData } = useFetch();
+  const [nameError, setNameError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [membershipError, setMembershipError] = useState(false);
   const [userData, setUserData] = useState<User>({
     id: parseInt(userId as string),
     name: "",
@@ -27,6 +30,35 @@ function UserEdit() {
   useEffect(() => {
     setUserData(data as User);
   }, [data]);
+
+  useEffect(() => {
+    if (userData?.name.length < 5) {
+      setNameError(true);
+    } else {
+      setNameError(false);
+    }
+  }, [userData?.name]);
+  useEffect(() => {
+    if (
+      userData?.email.length < 3 ||
+      !userData?.email.includes("@") ||
+      !userData?.email.includes(".com")
+    ) {
+      setEmailError(true);
+    } else {
+      setEmailError(false);
+    }
+  }, [userData?.email]);
+
+  useEffect(() => {
+    if (userData?.membership === data?.membership) {
+      setMembershipError(true);
+    } else {
+      setMembershipError(false);
+    }
+  }, [userData?.membership]);
+
+  const hasError = nameError || emailError || membershipError;
 
   const handleUpdate = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -43,7 +75,7 @@ function UserEdit() {
     <div className="flex h-screen">
       <div className="w-[15%]"></div>
       <div className="w-[85%] flex justify-center items-center">
-        <div className="flex items-center justify-center bg-black rounded-[0.5rem] text-white p-4">
+        <div className="flex items-center justify-center w-[50%] bg-black rounded-[0.5rem] text-white p-4">
           <form
             className="flex flex-col text-[1.5rem] gap-4 items-center"
             onSubmit={(e) => {
@@ -68,6 +100,11 @@ function UserEdit() {
                 setUserData({ ...userData, name: e.target.value })
               }
             />
+            {nameError && (
+              <p className="text-red-500 text-[1rem]">
+                Name requires at least 5 letters
+              </p>
+            )}
             <label htmlFor="email">Email: </label>
             <input
               className="bg-white rounded-[0.5rem] text-black p-2"
@@ -79,6 +116,11 @@ function UserEdit() {
                 setUserData({ ...userData, email: e.target.value })
               }
             />
+            {emailError && (
+              <p className="text-red-500 text-[1rem]">
+                Email requires atleast 5 letters, @, and .com
+              </p>
+            )}
             <label htmlFor="membership">Membership: </label>
             <select
               className="bg-white rounded-[0.5rem] text-black p-2"
@@ -92,11 +134,17 @@ function UserEdit() {
               <option value="gold">Gold</option>
               <option value="platinum">Platinum</option>
             </select>
+            {membershipError && (
+              <p className="text-red-500 text-[1rem]">
+                Membership must be different from existing membership.
+              </p>
+            )}
             <p>{IDRFormat.format(data?.balance as number)}</p>
             <input
-              className="border-[2px] border-white rounded-[0.5rem] h-12 w-28 hover:bg-white hover:text-black"
+              className="border-[2px] border-white rounded-[0.5rem] h-12 w-28 hover:bg-white hover:text-black disabled:bg-gray-600 disabled:cursor-not-allowed"
               type="submit"
               value="Update"
+              disabled={hasError}
             />
           </form>
         </div>
