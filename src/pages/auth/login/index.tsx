@@ -51,6 +51,10 @@ const Login = () => {
       Cookie.set("id", user.id.toString());
       Cookie.set("role", user.role);
       Cookie.set("token", token());
+      const role = Cookie.get("role");
+      if (role === "admin") {
+        return router.push("/dashboard");
+      }
       return router.push("/home");
     }
 
