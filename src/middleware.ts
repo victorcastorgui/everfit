@@ -1,19 +1,8 @@
-// import { NextRequest, NextResponse } from "next/server";
-
-// export default function middleware(req: NextRequest) {
-//   let verify = req.cookies.get("role")?.value;
-//   let url = req.url;
-
-//   if (verify === "" && url.includes("/profile")) {
-//     return NextResponse.redirect("http://localhost:8000/");
-//   }
-
-//   if (verify === "user" && url === "http://localhost:8000/auth/login") {
-//     return NextResponse.redirect("http://localhost:8000/home");
-//   }
-// }
-
-import { adminProtectedRoutes, protectedRoutes } from "@/routes/route";
+import {
+  adminProtectedRoutes,
+  protectedRoutes,
+  publicRoutes,
+} from "@/routes/route";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
@@ -21,25 +10,42 @@ export function middleware(req: NextRequest) {
   const token = req.cookies.get("token")?.value;
   const role = req.cookies.get("role")?.value;
 
-  if (protectedRoutes.includes(req.nextUrl.pathname) && !token && !role) {
+  const redirectToLogin = () => {
     req.cookies.delete("token");
     req.cookies.delete("role");
-    req.cookies.delete("id");
 
     const response = NextResponse.redirect(new URL("/auth/login", req.url));
     response.cookies.delete("token");
 
     return response;
+  };
+
+  if (
+    protectedRoutes.some((route) => req.nextUrl.pathname.startsWith(route)) &&
+    (!token || role !== "user")
+  ) {
+    if (role === "admin") {
+      return NextResponse.redirect(new URL("/dashboard", req.url));
+    }
+    return redirectToLogin();
   }
 
-  if (adminProtectedRoutes.includes(req.nextUrl.pathname) && !token && !role) {
-    req.cookies.delete("token");
-    req.cookies.delete("role");
-    req.cookies.delete("id");
+  if (
+    adminProtectedRoutes.some((route) =>
+      req.nextUrl.pathname.startsWith(route)
+    ) &&
+    (!token || role !== "admin")
+  ) {
+    if (role === "user") {
+      return NextResponse.redirect(new URL("/home", req.url));
+    }
+    return redirectToLogin();
+  }
 
-    const response = NextResponse.redirect(new URL("/auth/login", req.url));
-    response.cookies.delete("token");
-
-    return response;
+  if (publicRoutes.some((route) => req.nextUrl.pathname.startsWith(route))) {
+    if (role === "admin") {
+      return NextResponse.redirect(new URL("/dashboard", req.url));
+    }
+    return;
   }
 }
