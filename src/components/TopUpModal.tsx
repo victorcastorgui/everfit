@@ -46,7 +46,6 @@ function TopUpModal({
     e.preventDefault();
 
     const updateBalance = (data?.balance as number) + parseInt(amount);
-    console.log(updateBalance);
 
     const URL = `${API_URL}/users/${data.id}`;
     const options = {
