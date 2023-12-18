@@ -104,7 +104,7 @@ function TopUpModal({
               <option value="ovo">OVO</option>
             </select>
             <label
-              htmlFor="countries"
+              htmlFor="amount"
               className="block mb-2 text-lg font-medium text-black"
             >
               Amount:
