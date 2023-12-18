@@ -1,9 +1,8 @@
 export const protectedRoutes = [
   "/profile",
   "/history",
-  "/history/:id",
-  "purchase/:id",
+  "/purchase",
+  "/bookmarks",
 ];
-export const authRoutes = ["/auth/login"];
-export const publicRoutes = ["/home", "/"];
-export const adminProtectedRoutes = ["/admin"];
+export const publicRoutes = ["/home", "/events"];
+export const adminProtectedRoutes = ["/dashboard", "/manageEvents", "/users"];
