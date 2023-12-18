@@ -13,7 +13,7 @@
 //   }
 // }
 
-import { authRoutes, protectedRoutes } from "@/routes/route";
+import { adminProtectedRoutes, protectedRoutes } from "@/routes/route";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
@@ -24,6 +24,7 @@ export function middleware(req: NextRequest) {
   if (protectedRoutes.includes(req.nextUrl.pathname) && !token && !role) {
     req.cookies.delete("token");
     req.cookies.delete("role");
+    req.cookies.delete("id");
 
     const response = NextResponse.redirect(new URL("/auth/login", req.url));
     response.cookies.delete("token");
@@ -31,10 +32,14 @@ export function middleware(req: NextRequest) {
     return response;
   }
 
-  if (authRoutes.includes(req.nextUrl.pathname) && token) {
-    return NextResponse.redirect(new URL("/home", req.url));
-  }
-  if (authRoutes.includes(req.nextUrl.pathname) && token && role == "admin") {
-    return NextResponse.redirect(new URL("/admin", req.url));
+  if (adminProtectedRoutes.includes(req.nextUrl.pathname) && !token && !role) {
+    req.cookies.delete("token");
+    req.cookies.delete("role");
+    req.cookies.delete("id");
+
+    const response = NextResponse.redirect(new URL("/auth/login", req.url));
+    response.cookies.delete("token");
+
+    return response;
   }
 }
