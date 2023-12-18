@@ -22,7 +22,7 @@ function User() {
   const handleDeleteUser = (id: number) => {
     const URL = `${API_URL}/users/${id}`;
     const options = {
-      method: "DELETE"
+      method: "DELETE",
     };
     fetchData(URL, options);
   };
