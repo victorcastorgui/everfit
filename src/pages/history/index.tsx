@@ -25,7 +25,6 @@ function History() {
     `${API_URL}/purchases?userId=${userId}&&_expand=event`,
     fetcher
   );
-  console.log(data);
 
   const handleDetail = (id: number) => {
     router.push(`/history/${id}`);
