@@ -6,7 +6,7 @@ import { API_URL } from "@/utils/API_URL";
 import { IDRFormat } from "@/utils/IDRFormat";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useSWR from "swr";
 
 interface Bookmark {
@@ -21,15 +21,18 @@ function Bookmarks() {
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
   const id = Cookies.get("id");
   const { push } = useRouter();
-  const { data } = useSWR<Bookmark[]>(
+  const { data, mutate } = useSWR<Bookmark[]>(
     `${API_URL}/bookmarks/?userId=${id}&&_expand=event`,
-    fetcher,
-    { refreshInterval: 1000 }
+    fetcher
   );
-  const { fetchData } = useFetch();
-  if (data?.length === 0) {
-    setEmpty(true);
-  }
+  const { data: remainingData, fetchData } = useFetch();
+
+  useEffect(() => {
+    if (remainingData !== null) {
+      mutate();
+    }
+  }, [remainingData]);
+
   const removeBookmark = (bookmarkId: number) => {
     const URL = `${API_URL}/bookmarks/${bookmarkId}`;
     const options = {
