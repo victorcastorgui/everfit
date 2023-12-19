@@ -57,7 +57,7 @@ function AddEvent() {
   }, [startTime]);
 
   useEffect(() => {
-    if (duration.length < 7) {
+    if (duration.length < 6) {
       setDurationError(true);
     } else {
       setDurationError(false);
@@ -149,6 +149,7 @@ function AddEvent() {
       }),
     };
     await fetchData(URL, options);
+    push("/manageEvents");
   };
 
   const hasError =
