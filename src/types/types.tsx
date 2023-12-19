@@ -40,7 +40,7 @@ export interface Event {
   id: number;
   name: string;
   startTime: string;
-  duration: number;
+  duration: string;
   category: string;
   price: number;
   image: string;
