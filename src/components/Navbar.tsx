@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { API_URL } from "@/utils/API_URL";
+import Reveal from "@/utils/Reveal";
 import Cookie from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -32,7 +33,10 @@ function Navbar() {
   return (
     <nav className="bg-black py-3">
       <div className="flex justify-between items-center w-[85%] m-auto">
-        <Logo />
+        <Reveal>
+          <Logo />
+        </Reveal>
+
         <button
           onClick={handleNavbarDisplay}
           className="min-[801px]:hidden p-2 w-10 h-10 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:hover:bg-gray-700 dark:focus:ring-gray-600"

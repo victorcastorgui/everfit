@@ -4,6 +4,7 @@ import { useFetch } from "@/hooks/useFetch";
 import { Event } from "@/types/types";
 import { API_URL } from "@/utils/API_URL";
 import { IDRFormat } from "@/utils/IDRFormat";
+import Reveal from "@/utils/Reveal";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -66,12 +67,14 @@ function Bookmarks() {
                       alt="event image"
                     />
                   </div>
-                  <div className="flex flex-col gap-[1rem] text-[1rem] text-center">
-                    <p className="text-[1.3rem]">{item.event.name}</p>
-                    <p>
-                      <b>{IDRFormat.format(item.event.price)}</b>
-                    </p>
-                  </div>
+                  <Reveal>
+                    <div className="flex flex-col gap-[1rem] text-[1rem] text-center">
+                      <p className="text-[1.3rem]">{item.event.name}</p>
+                      <p>
+                        <b>{IDRFormat.format(item.event.price)}</b>
+                      </p>
+                    </div>
+                  </Reveal>
                   <div className="flex flex-col gap-6">
                     <button
                       onClick={() => handleDetail(item.eventId)}

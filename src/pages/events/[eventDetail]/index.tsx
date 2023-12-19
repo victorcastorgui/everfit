@@ -3,6 +3,7 @@ import BackPage from "@/components/BackPage";
 import PageTitle from "@/components/PageTitle";
 import { API_URL } from "@/utils/API_URL";
 import { IDRFormat } from "@/utils/IDRFormat";
+import Reveal from "@/utils/Reveal";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 
@@ -33,17 +34,21 @@ function DetailPage() {
               src={data?.image}
               alt="event image"
             />
-            <div className="max-[800px]:mt-[1rem] max-[600px]:text-[1rem] text-[1.5rem]">
-              <p>Start time: {data?.startTime}</p>
-              <p>Duration: {data?.duration}</p>
-              <p>Category: {data?.category}</p>
-              <p>Price: {IDRFormat.format(data?.price)}</p>
-              <p>Capacity: {data?.capacity}</p>
-            </div>
+            <Reveal>
+              <div className="max-[800px]:mt-[1rem] max-[600px]:text-[1rem] text-[1.5rem]">
+                <p>Start time: {data?.startTime}</p>
+                <p>Duration: {data?.duration}</p>
+                <p>Category: {data?.category}</p>
+                <p>Price: {IDRFormat.format(data?.price)}</p>
+                <p>Capacity: {data?.capacity}</p>
+              </div>
+            </Reveal>
           </div>
-          <p className="max-[600px]:text-[1rem] mt-[1rem] text-[1.5rem]">
-            {data?.description}
-          </p>
+          <Reveal>
+            <p className="max-[600px]:text-[1rem] mt-[1rem] text-[1.5rem]">
+              {data?.description}
+            </p>
+          </Reveal>
         </div>
       </div>
       <div className="flex w-[85%] m-auto justify-end mt-[2rem]">

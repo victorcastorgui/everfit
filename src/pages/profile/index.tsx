@@ -6,6 +6,7 @@ import { useFetch } from "@/hooks/useFetch";
 import useProfile from "@/hooks/useProfile";
 import { User } from "@/types/types";
 import { API_URL } from "@/utils/API_URL";
+import Reveal from "@/utils/Reveal";
 import Cookie from "js-cookie";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -94,11 +95,13 @@ function Profile() {
         <div className="max-[800px]:py-[2rem] max-[800px]:flex-col flex w-[85%] h-[100%] m-auto justify-between items-center">
           <div className="flex flex-col">
             <div className="h-[16rem] w-[16rem] rounded-full object-cover">
-              <img
-                src={data?.image}
-                className="h-[100%] w-[100%]"
-                alt="user profile image"
-              />
+              <Reveal>
+                <img
+                  src={data?.image}
+                  className="h-[100%] w-[100%]"
+                  alt="user profile image"
+                />
+              </Reveal>
             </div>
             <div className="flex gap-[1rem] mt-[1rem] justify-center items-center">
               <label htmlFor="profile">
@@ -122,9 +125,11 @@ function Profile() {
                 Save
               </button>
             </div>
-            <p className="mt-[1rem] text-center text-[1.5rem]">
-              Balance: {data?.balance}
-            </p>
+            <Reveal>
+              <p className="mt-[1rem] text-center text-[1.5rem]">
+                Balance: {data?.balance}
+              </p>
+            </Reveal>
             <button
               onClick={() => setShowTopUpModal(true)}
               className="mt-[1rem] text-[1.3rem] text-white py-[0.2rem] px-[0.6rem] border-white border-[1px] rounded-[0.5rem]"
@@ -133,10 +138,18 @@ function Profile() {
             </button>
           </div>
           <div className="max-[800px]:pt-[1rem] flex flex-col gap-[1rem] text-[1.5rem]">
-            <p>ID: {data?.id}</p>
-            <p>Name: {data?.name}</p>
-            <p>Email: {data?.email}</p>
-            <p>Membership: {data?.membership.toUpperCase()}</p>
+            <Reveal>
+              <p>ID: {data?.id}</p>
+            </Reveal>
+            <Reveal>
+              <p>Name: {data?.name}</p>
+            </Reveal>
+            <Reveal>
+              <p>Email: {data?.email}</p>
+            </Reveal>
+            <Reveal>
+              <p>Membership: {data?.membership.toUpperCase()}</p>
+            </Reveal>
             <button
               onClick={() => setShowMemberModal(true)}
               className="text-[1.3rem] text-white py-[0.2rem] px-[0.6rem] border-white border-[1px] rounded-[0.5rem]"

@@ -1,6 +1,7 @@
 import { Event, Purchase, User } from "@/types/types";
 import { API_URL } from "@/utils/API_URL";
 import { IDRFormat } from "@/utils/IDRFormat";
+import Reveal from "@/utils/Reveal";
 import Cookies from "js-cookie";
 import Image from "next/image";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
@@ -99,76 +100,88 @@ const Payment = ({
         <div className="bg-white w-full rounded-[0.5rem] p-[1.5rem]">
           <PaymentCategory>Order Detail</PaymentCategory>
           <div className="flex justify-between">
-            <div>
-              <p>Class Name</p>
-              <p>Ticket Price</p>
-              <p>Membership</p>
-              <p>Discount</p>
-              <p>Merch Quantity</p>
-              <p>Total Merch Price</p>
-            </div>
-            <div>
-              <p>{eventData?.name}</p>
-              <p>{IDRFormat.format(eventData?.price as number)}</p>
-              <p>{userData?.membership?.toUpperCase()}</p>
-              <p>{discount}%</p>
-              <p>{totalMerchQuantity}</p>
-              <p>{IDRFormat.format(totalMerchPrice)}</p>
-            </div>
+            <Reveal>
+              <div>
+                <p>Class Name</p>
+                <p>Ticket Price</p>
+                <p>Membership</p>
+                <p>Discount</p>
+                <p>Merch Quantity</p>
+                <p>Total Merch Price</p>
+              </div>
+            </Reveal>
+            <Reveal>
+              <div>
+                <p>{eventData?.name}</p>
+                <p>{IDRFormat.format(eventData?.price as number)}</p>
+                <p>{userData?.membership?.toUpperCase()}</p>
+                <p>{discount}%</p>
+                <p>{totalMerchQuantity}</p>
+                <p>{IDRFormat.format(totalMerchPrice)}</p>
+              </div>
+            </Reveal>
           </div>
-          <div>
-            <hr />
-            <p>Grand Total</p>
-            <p>{IDRFormat.format(grandTotal)}</p>
-          </div>
+          <Reveal>
+            <div>
+              <hr />
+              <p>Grand Total</p>
+              <p>{IDRFormat.format(grandTotal)}</p>
+            </div>
+          </Reveal>
         </div>
         <div className="bg-white w-full rounded-[0.5rem] p-[1.5rem]">
           <PaymentCategory>Information</PaymentCategory>
-          <div className="grid grid-cols-2">
-            <p>Purchase Date</p>
-            <p>{purchaseData.purchaseDate.toString()}</p>
-            <p>Items</p>
-            <div>
-              {purchaseData.merchs.map((item) => (
-                <div key={item.id}>
-                  <p>{item.name}</p>
-                  <p>
-                    {item.qty} x {item.price}
-                  </p>
-                </div>
-              ))}
+          <Reveal>
+            <div className="grid grid-cols-2">
+              <p>Purchase Date</p>
+              <p>{purchaseData.purchaseDate.toString()}</p>
+              <p>Items</p>
+              <div>
+                {purchaseData.merchs.map((item) => (
+                  <div key={item.id}>
+                    <p>{item.name}</p>
+                    <p>
+                      {item.qty} x {item.price}
+                    </p>
+                  </div>
+                ))}
+              </div>
+              <p>Name</p>
+              <p>{userData?.name}</p>
+              <p>Email</p>
+              <p>{userData?.email}</p>
             </div>
-            <p>Name</p>
-            <p>{userData?.name}</p>
-            <p>Email</p>
-            <p>{userData?.email}</p>
-          </div>
+          </Reveal>
         </div>
       </div>
       <div className="w-[85%] m-auto bg-white rounded-[0.5rem] p-[1.5rem] mb-[2rem]">
         <PaymentCategory>Payment Method</PaymentCategory>
         <div className="grid grid-cols-3 max-[600px]:grid-cols-2 max-[400px]:grid-cols-1 place-items-center gap-y-3">
           <div className="flex gap-1">
-            <input
-              onClick={() => {
-                if ((userData?.balance as number) >= grandTotal) {
-                  setDisable(false);
-                }
-              }}
-              type="radio"
-              id="balance"
-              name="card"
-              disabled={hasError}
-            />
-            <label className="flex gap-1 items-center" htmlFor="balance">
-              <Image
-                src="/icons/wallet.png"
-                alt="wallet icon"
-                width={40}
-                height={40}
+            <Reveal>
+              <input
+                onClick={() => {
+                  if ((userData?.balance as number) >= grandTotal) {
+                    setDisable(false);
+                  }
+                }}
+                type="radio"
+                id="balance"
+                name="card"
+                disabled={hasError}
               />
-              {IDRFormat.format(userData?.balance as number)}
-            </label>
+            </Reveal>
+            <Reveal>
+              <label className="flex gap-1 items-center" htmlFor="balance">
+                <Image
+                  src="/icons/wallet.png"
+                  alt="wallet icon"
+                  width={40}
+                  height={40}
+                />
+                {IDRFormat.format(userData?.balance as number)}
+              </label>
+            </Reveal>
             {showError ? (
               <p className="text-red-500">
                 Balance is not enough, top up first
@@ -177,11 +190,21 @@ const Payment = ({
               <></>
             )}
           </div>
-          <PaymentMethod>visa</PaymentMethod>
-          <PaymentMethod>mastercard</PaymentMethod>
-          <PaymentMethod>paypal</PaymentMethod>
-          <PaymentMethod>stripe</PaymentMethod>
-          <PaymentMethod>discover</PaymentMethod>
+          <Reveal>
+            <PaymentMethod>visa</PaymentMethod>
+          </Reveal>
+          <Reveal>
+            <PaymentMethod>mastercard</PaymentMethod>
+          </Reveal>
+          <Reveal>
+            <PaymentMethod>paypal</PaymentMethod>
+          </Reveal>
+          <Reveal>
+            <PaymentMethod>stripe</PaymentMethod>
+          </Reveal>
+          <Reveal>
+            <PaymentMethod>discover</PaymentMethod>
+          </Reveal>
         </div>
       </div>
     </>
