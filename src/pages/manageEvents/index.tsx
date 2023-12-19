@@ -13,7 +13,6 @@ function ManageEvents() {
     refreshInterval: 1000,
   });
   const { fetchData } = useFetch();
-  console.log(data);
   const handleDeleteEvent = (id: number) => {
     const URL = `${API_URL}/events/${id}`;
     const options = {
