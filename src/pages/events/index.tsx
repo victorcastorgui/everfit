@@ -10,7 +10,6 @@ import useSWR from "swr";
 
 function Events() {
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
-
   const { data } = useSWR<Event[]>(`${API_URL}/events`, fetcher);
   const router = useRouter();
   const userId = Cookie.get("id");
