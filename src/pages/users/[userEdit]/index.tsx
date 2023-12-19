@@ -1,3 +1,4 @@
+import ErrorMessage from "@/components/ErrorMessage";
 import { useFetch } from "@/hooks/useFetch";
 import { User } from "@/types/types";
 import { API_URL } from "@/utils/API_URL";
@@ -101,9 +102,7 @@ function UserEdit() {
               }
             />
             {nameError && (
-              <p className="text-red-500 text-[1rem]">
-                Name requires at least 5 letters
-              </p>
+              <ErrorMessage>Name requires at least 5 letters</ErrorMessage>
             )}
             <label htmlFor="email">Email: </label>
             <input
@@ -117,9 +116,9 @@ function UserEdit() {
               }
             />
             {emailError && (
-              <p className="text-red-500 text-[1rem]">
+              <ErrorMessage>
                 Email requires atleast 5 letters, @, and .com
-              </p>
+              </ErrorMessage>
             )}
             <label htmlFor="membership">Membership: </label>
             <select
@@ -135,9 +134,9 @@ function UserEdit() {
               <option value="platinum">Platinum</option>
             </select>
             {membershipError && (
-              <p className="text-red-500 text-[1rem]">
+              <ErrorMessage>
                 Membership must be different from existing membership.
-              </p>
+              </ErrorMessage>
             )}
             <p>{IDRFormat.format(data?.balance as number)}</p>
             <input
