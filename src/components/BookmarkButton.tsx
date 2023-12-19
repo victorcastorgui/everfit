@@ -1,15 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
+import useBookmark from "@/hooks/useBookmark";
 import { useFetch } from "@/hooks/useFetch";
 import { Bookmarks } from "@/types/types";
 import { API_URL } from "@/utils/API_URL";
 import { useEffect, useState } from "react";
-import useSWR from "swr";
-
-interface Bookmark {
-  userId: number;
-  eventId: number;
-  id: number;
-}
 
 function BookmarkButton({
   eventId,
@@ -18,13 +12,16 @@ function BookmarkButton({
   eventId: number;
   userId: string;
 }) {
-  const { fetchData } = useFetch<Bookmarks>();
-  const fetcher = (url: string) => fetch(url).then((res) => res.json());
-  const { data, isLoading } = useSWR<Bookmark[]>(
-    `${API_URL}/bookmarks/?userId=${userId}`,
-    fetcher,
-    { refreshInterval: 1000 }
+  const { data: bookmarkEvent, fetchData } = useFetch<Bookmarks>();
+  const { data, isLoading, getBookmark } = useBookmark(
+    `${API_URL}/bookmarks/?userId=${userId}`
   );
+
+  useEffect(() => {
+    if (bookmarkEvent !== null) {
+      getBookmark();
+    }
+  }, [bookmarkEvent]);
 
   const bookmarkId = data?.find((item) => item.eventId === eventId);
 
