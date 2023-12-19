@@ -3,13 +3,13 @@ import ChangeMembership from "@/components/ChangeMembership";
 import PageTitle from "@/components/PageTitle";
 import TopUpModal from "@/components/TopUpModal";
 import { useFetch } from "@/hooks/useFetch";
+import useProfile from "@/hooks/useProfile";
 import { User } from "@/types/types";
 import { API_URL } from "@/utils/API_URL";
 import Cookie from "js-cookie";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useState } from "react";
-import useSWR from "swr";
+import { useEffect, useState } from "react";
 
 interface Cloudinary {
   secure_url: string;
@@ -17,17 +17,18 @@ interface Cloudinary {
 
 function Profile() {
   const router = useRouter();
-  const { fetchData: putFetchData } = useFetch<User>();
+  const { data: updatedData, fetchData: putFetchData } = useFetch<User>();
   const [selectedPicture, setSelectedPicture] = useState<File | null>(null);
   const [topUpModal, setShowTopUpModal] = useState(false);
   const [memberModal, setShowMemberModal] = useState(false);
   const id = Cookie.get("id");
+  const { data, isLoading, getProfile } = useProfile(`${API_URL}/users/${id}`);
 
-  const fetcher = (url: string) => fetch(url).then((res) => res.json());
-
-  const { data, isLoading } = useSWR(`${API_URL}/users/${id}`, fetcher, {
-    refreshInterval: 1000,
-  });
+  useEffect(() => {
+    if (updatedData !== null) {
+      getProfile();
+    }
+  }, [updatedData]);
 
   if (isLoading) {
     return (
