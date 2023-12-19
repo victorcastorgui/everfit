@@ -3,6 +3,7 @@ import { User } from "@/types/types";
 import { API_URL } from "@/utils/API_URL";
 import Image from "next/image";
 import React, { SetStateAction, useEffect, useState } from "react";
+import ErrorMessage from "./ErrorMessage";
 
 function TopUpModal({
   setShowTopUpModal,
@@ -114,10 +115,8 @@ function TopUpModal({
               type="number"
               placeholder="Enter amount here..."
             />
-            {showAmountErr ? (
-              <p className="text-red-700">Minimum: 10000, Maximum: 10000000</p>
-            ) : (
-              <></>
+            {showAmountErr && (
+              <ErrorMessage>Minimum: 10000, Maximum: 10000000</ErrorMessage>
             )}
             <p className="text-green-500">Current Balance: {data.balance}</p>
             <label
@@ -132,25 +131,15 @@ function TopUpModal({
               type="password"
               placeholder="Enter pin here..."
             />
-            {showPinErr ? (
-              <p className="text-red-700">Pin must contain 6 digits</p>
-            ) : (
-              <></>
+            {showPinErr && (
+              <ErrorMessage>Pin must contain 6 digits</ErrorMessage>
             )}
-            {showAmountErr || showPinErr ? (
-              <input
-                type="submit"
-                value="Top Up"
-                disabled={hasError}
-                className="bg-gray-600 text-white rounded-[0.5rem] h-[3rem] mt-3"
-              />
-            ) : (
-              <input
-                type="submit"
-                value="Top Up"
-                className="bg-black text-white rounded-[0.5rem] h-[3rem] mt-3"
-              />
-            )}
+            <input
+              type="submit"
+              value="Top Up"
+              disabled={hasError}
+              className=" bg-black disabled:cursor-not-allowed disabled:bg-gray-600 text-white rounded-[0.5rem] h-[3rem] mt-3"
+            />
           </form>
         )}
       </div>
