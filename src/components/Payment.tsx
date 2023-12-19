@@ -43,7 +43,6 @@ const Payment = ({
   const [totalMerchQuantity, setTotalQuantity] = useState(0);
   const [totalMerchPrice, setTotalMerchPrice] = useState(0);
   const [grandTotal, setGrandTotal] = useState(0);
-  console.log(grandTotal);
 
   useEffect(() => {
     calculateTotal();
