@@ -3,9 +3,11 @@ import { useFetch } from "@/hooks/useFetch";
 import { Event } from "@/types/types";
 import { API_URL } from "@/utils/API_URL";
 import { IDRFormat } from "@/utils/IDRFormat";
+import { useRouter } from "next/router";
 import useSWR from "swr";
 
 function ManageEvents() {
+  const { push } = useRouter();
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
   const { data } = useSWR<Event[]>(`${API_URL}/events`, fetcher, {
     refreshInterval: 1000,
@@ -19,13 +21,19 @@ function ManageEvents() {
     };
     fetchData(URL, options);
   };
+  const handleAddEvent = () => {
+    push("/manageEvents/addEvent");
+  };
   return (
     <div className="flex">
       <div className="w-[15%]"></div>
       <div className="w-[85%] h-screen flex flex-col items-center">
         <PageTitle>Events</PageTitle>
         <div className="w-[90%] flex justify-end">
-          <button className="flex justify-center items-center border-[2px] bg-black text-white hover:bg-white border-black hover:text-black rounded-[0.5rem] w-24 h-10">
+          <button
+            onClick={handleAddEvent}
+            className="flex justify-center items-center border-[2px] bg-black text-white hover:bg-white border-black hover:text-black rounded-[0.5rem] w-24 h-10"
+          >
             New Event
           </button>
         </div>
