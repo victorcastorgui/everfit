@@ -32,13 +32,13 @@ function User() {
       <div className="w-[15%]"></div>
       <div className="w-[85%] h-screen flex flex-col items-center">
         <PageTitle>Users</PageTitle>
-        <table className="table-auto border-[2px] border-black rounded-[0.5rem] text-left mt-[2rem]">
+        <table className="w-[90%] table-auto border-[2px] border-black rounded-[0.5rem] text-left mt-[2rem]">
           <thead>
             <tr className="border-b border-black bg-black text-white">
-              <th className="p-[1rem] w-12">ID</th>
-              <th className="p-[1rem] w-60">Name</th>
-              <th className="p-[1rem] w-40">Balance</th>
-              <th className="p-[1rem] w-40">Membership</th>
+              <th className="p-[1rem]">ID</th>
+              <th className="p-[1rem]">Name</th>
+              <th className="p-[1rem]">Balance</th>
+              <th className="p-[1rem]">Membership</th>
               <th></th>
             </tr>
           </thead>
@@ -51,7 +51,7 @@ function User() {
                   {IDRFormat.format(item.balance as number)}
                 </td>
                 <td className="p-[1rem]">{item.membership}</td>
-                <td className="p-[1rem] flex gap-3">
+                <td className="p-[1rem] flex justify-center gap-3">
                   <button
                     className="bg-black border-[2px] border-black text-white hover:bg-white hover:text-black rounded-[0.5rem] w-24 h-10"
                     onClick={() => handleEditUser(item.id)}
