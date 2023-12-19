@@ -245,7 +245,13 @@ function EditEvent() {
           </div>
           <div>
             <label htmlFor="image">Image:</label>
-            <img src={eventData?.image} alt="event image" />
+            <div className="h-[10rem] w-[10rem] object-cover mb-2 border-[2px] rounded-[0.5rem] p-4">
+              <img
+                className="w-full h-full"
+                src={eventData?.image}
+                alt="event image"
+              />
+            </div>
             <InputForm type="file" id="image" onChange={handlePictureChange} />
             <button type="button" onClick={handleUpload}>
               Upload
