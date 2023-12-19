@@ -1,0 +1,230 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Admin",
+      "email": "admin@everfit.com",
+      "password": "admin",
+      "role": "admin"
+    },
+    {
+      "id": 2,
+      "name": "Second Admin",
+      "email": "secondadmin@everfit.com",
+      "password": "secondadmin",
+      "role": "admin"
+    },
+    {
+      "id": 3,
+      "name": "User",
+      "email": "user@gmail.com",
+      "password": "user",
+      "role": "user",
+      "balance": 1654000,
+      "membership": "platinum",
+      "image": "https://res.cloudinary.com/adminmatoa/image/upload/v1702547609/no4vh1qp82yokaw0t4hs.svg"
+    },
+    {
+      "id": 4,
+      "name": "Test 123",
+      "email": "test123@gmail.com",
+      "password": "user",
+      "role": "user",
+      "balance": 1654000,
+      "membership": "gold",
+      "image": "https://res.cloudinary.com/adminmatoa/image/upload/v1702547609/no4vh1qp82yokaw0t4hs.svg"
+    }
+  ],
+  "events": [
+    {
+      "id": 1,
+      "name": "Color Run JKT",
+      "startTime": "8:00 AM",
+      "duration": "3 Hours",
+      "category": "marathon",
+      "price": 250000,
+      "image": "https://asset.kompas.com/crop/0x0:780x390/780x390/data/photo/2014/01/10/1536590THE-COLOR-RUN780x390.jpg",
+      "description": "An event series and five kilometer paint race, inspired by the Hindu festival of Holi, that is owned and operated by The Color Run LLC, a for-profit company. It takes place in North America, South America, Europe, Asia, New Zealand, Australia, Africa, Qatar and the United Arab Emirates.",
+      "capacity": 150
+    },
+    {
+      "id": 2,
+      "name": "Yoga Zen",
+      "startTime": "10:00 AM",
+      "duration": "1.5 Hours",
+      "category": "yoga",
+      "price": 50000,
+      "image": "https://www.fitnessfirst.co.id/-/media/project/evolution-wellness/fitness-first/south-east-asia/malaysia/classes/gentle-flow-yoga/gentle-flow-yoga-class-malaysia.jpg",
+      "description": "Yoga is an ancient practice that involves physical poses, concentration, and deep breathing. A regular yoga practice can promote endurance, strength, calmness, flexibility, and well-being.",
+      "capacity": 20
+    },
+    {
+      "id": 3,
+      "name": "Rythm Ride",
+      "startTime": "12:00 PM",
+      "duration": "1 Hour",
+      "category": "cycling",
+      "price": 80000,
+      "image": "https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto,w_1125/media_venue/lwxq6ko6j4v54idg40qz.jpg",
+      "description": "Rhythm RIDE is a high intensity spin class that focuses on riding to the beat of the music with upper body movements that feel like a dance party on the bike while giving you a full body work out.",
+      "capacity": 10
+    },
+    {
+      "id": 4,
+      "name": "Muay Thai",
+      "startTime": "13:00 PM",
+      "duration": "1 Hour",
+      "category": "martial art",
+      "price": 100000,
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Muay_Thai_Fight_Us_Vs_Burma_%2880668065%29.jpeg/1200px-Muay_Thai_Fight_Us_Vs_Burma_%2880668065%29.jpeg",
+      "description": "Thai boxing, is a combat sport that uses stand-up striking, sweeps, and various clinching techniques. This discipline is known as the Art of eight limbs, as it is characterised by the combined use of fists, elbows, knees and shins.",
+      "capacity": 10
+    },
+    {
+      "id": 5,
+      "name": "Badminton Tournament",
+      "startTime": "8:00 AM",
+      "duration": "5 Hours",
+      "category": "badminton",
+      "price": 250000,
+      "image": "https://cdnwpedutorenews.gramedia.net/wp-content/uploads/2022/09/11070505/sejarah-badminton1.jpg",
+      "description": "A racquet sport played using racquets to hit a shuttlecock across a net. Although it may be played with larger teams, the most common forms of the game are singles and doubles.",
+      "capacity": 10
+    },
+    {
+      "id": 6,
+      "name": "Swimming",
+      "startTime": "10:00 AM",
+      "duration": "1.5 Hours",
+      "category": "swimming",
+      "price": 50000,
+      "image": "https://img.olympics.com/images/image/private/t_s_pog_staticContent_hero_xl_2x/f_auto/primary/tlgixw3prayno2pa4qs0",
+      "description": "An individual or team racing sport that requires the use of one's entire body to move through water. The sport takes place in pools or open water (e.g., in a sea or lake). Competitive swimming is one of the most popular Olympic sports",
+      "capacity": 20
+    },
+    {
+      "id": 7,
+      "name": "Futsal",
+      "startTime": "12:00 PM",
+      "duration": "1 Hour",
+      "category": "futsal",
+      "price": 80000,
+      "image": "https://awsimages.detik.net.id/community/media/visual/2023/10/09/ilustrasi-futsal.jpeg?w=1200",
+      "description": "a football-based game played on a hardcourt like a basketball court, smaller than a football pitch, and mainly indoors. It has similarities to five-a-side football and indoor football. Futsal is played between two teams of five players each, one of whom is the goalkeeper.",
+      "capacity": 10
+    },
+    {
+      "id": 8,
+      "name": "Tennis",
+      "startTime": "13:00 PM",
+      "duration": "1 Hour",
+      "category": "tennis",
+      "price": 100000,
+      "image": "https://i.guim.co.uk/img/media/86ea7491d62964d3ae9737cb653b218a86c9e6a4/0_59_6800_4082/master/6800.jpg?width=1200&quality=85&auto=format&fit=max&s=d140116db0ae5b95f73c2cde59992521",
+      "description": "a racket sport that is played either individually against a single opponent or between two teams of two players each. Each player uses a tennis racket that is strung with cord to strike a hollow rubber ball covered with felt over or around a net and into the opponent's court.",
+      "capacity": 6
+    },
+    {
+      "name": "TEST 12345",
+      "startTime": "2023-12-19T11:50",
+      "duration": "1 Hour",
+      "category": "cycling",
+      "price": 1000000,
+      "image": "https://res.cloudinary.com/adminmatoa/image/upload/v1702961461/ol8vhnnjdc38koyt4mwq.png",
+      "description": "TEST 123 TEST 123 TEST 123",
+      "capacity": 100,
+      "id": 9
+    }
+  ],
+  "bookmarks": [
+    {
+      "userId": 3,
+      "eventId": 1,
+      "id": 1
+    },
+    {
+      "userId": 3,
+      "eventId": 2,
+      "id": 2
+    },
+    {
+      "userId": 3,
+      "eventId": 2,
+      "id": 3
+    },
+    {
+      "userId": 3,
+      "eventId": 3,
+      "id": 4
+    }
+  ],
+  "purchases": [
+    {
+      "id": 1,
+      "eventId": 2,
+      "userId": 3,
+      "paymentStatus": true,
+      "paymentTotal": 1189000,
+      "purchaseDate": "",
+      "discount": 20,
+      "merchs": [
+        {
+          "id": 1,
+          "eventId": 2,
+          "name": "Nike Dri-FIT One",
+          "desc": "Women's Standard-Fit Short-Sleeve Top",
+          "price": 369000,
+          "image": "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/9206f746-6228-4028-80bb-7d83d1f9c274/dri-fit-one-standard-fit-short-sleeve-top-vMPqml.png",
+          "qty": 1
+        },
+        {
+          "id": 2,
+          "eventId": 2,
+          "name": "Nike Universal",
+          "desc": "Women's Medium-Support High-Waisted Leggings with Pockets",
+          "price": 1189000,
+          "image": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/cda5c823-cecb-4226-8dea-b2a511060d30/universa-support-high-waisted-cropped-leggings-with-pockets-PKZjKw.png",
+          "qty": 1
+        }
+      ]
+    }
+  ],
+  "merchs": [
+    {
+      "id": 1,
+      "eventId": 2,
+      "name": "Nike Dri-FIT One",
+      "desc": "Women's Standard-Fit Short-Sleeve Top",
+      "price": 369000,
+      "image": "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/9206f746-6228-4028-80bb-7d83d1f9c274/dri-fit-one-standard-fit-short-sleeve-top-vMPqml.png",
+      "stock": 10
+    },
+    {
+      "id": 2,
+      "eventId": 2,
+      "name": "Nike Universal",
+      "desc": "Women's Medium-Support High-Waisted Leggings with Pockets",
+      "price": 1189000,
+      "image": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/cda5c823-cecb-4226-8dea-b2a511060d30/universa-support-high-waisted-cropped-leggings-with-pockets-PKZjKw.png",
+      "stock": 5
+    },
+    {
+      "id": 3,
+      "eventId": 3,
+      "name": "Nike Universal",
+      "desc": "Women's Medium-Support High-Waisted Leggings with Pockets",
+      "price": 1189000,
+      "image": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/cda5c823-cecb-4226-8dea-b2a511060d30/universa-support-high-waisted-cropped-leggings-with-pockets-PKZjKw.png",
+      "stock": 5
+    },
+    {
+      "id": 4,
+      "eventId": 2,
+      "name": "Nike Universal",
+      "desc": "Women's ABC Medium-Support High-Waisted Leggings with Pockets",
+      "price": 1189000,
+      "image": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/cda5c823-cecb-4226-8dea-b2a511060d30/universa-support-high-waisted-cropped-leggings-with-pockets-PKZjKw.png",
+      "stock": 5
+    }
+  ]
+}

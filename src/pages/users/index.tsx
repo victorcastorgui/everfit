@@ -9,7 +9,7 @@ import useSWR from "swr";
 function User() {
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
   const { data, mutate } = useSWR<User[]>(
-    `${API_URL}/users/?role=user`,
+    `${API_URL}/users?role=user`,
     fetcher,
     { refreshInterval: 1000 }
   );
