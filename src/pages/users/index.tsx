@@ -1,20 +1,21 @@
 import PageTitle from "@/components/PageTitle";
 import { useFetch } from "@/hooks/useFetch";
+import useUser from "@/hooks/useUser";
 import { User } from "@/types/types";
 import { API_URL } from "@/utils/API_URL";
 import { IDRFormat } from "@/utils/IDRFormat";
 import { useRouter } from "next/router";
-import useSWR from "swr";
+import { useEffect } from "react";
 
 function User() {
-  const fetcher = (url: string) => fetch(url).then((res) => res.json());
-  const { data, mutate } = useSWR<User[]>(
-    `${API_URL}/users?role=user`,
-    fetcher,
-    { refreshInterval: 1000 }
-  );
+  const { data, getUser } = useUser(`${API_URL}/users?role=user`);
   const { push } = useRouter();
-  const { fetchData } = useFetch();
+  const { data: remainingData, fetchData } = useFetch();
+  useEffect(() => {
+    if (remainingData !== null) {
+      getUser();
+    }
+  }, [remainingData]);
   const handleEditUser = (id: number) => {
     push(`/users/${id}`);
   };
