@@ -19,7 +19,7 @@ function AdminSideBar({
   };
 
   return (
-    <nav className=" bg-black min-w-[11rem] text-white h-screen flex flex-col w-[15%] z-40 justify-between items-center p-8 absolute">
+    <nav className=" bg-black min-w-[11rem] text-white h-screen flex flex-col w-[15%] z-40 justify-between items-center p-8 fixed">
       <Logo />
       <div className="flex flex-col gap-8">
         <Link className="hover:text-gray-500" href="/dashboard">
