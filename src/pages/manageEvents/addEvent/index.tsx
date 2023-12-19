@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import ErrorMessage from "@/components/ErrorMessage";
 import InputForm from "@/components/InputForm";
 import PageTitle from "@/components/PageTitle";
@@ -230,8 +231,15 @@ function AddEvent() {
           </div>
           <div>
             <label htmlFor="image">Image:</label>
+            <div className="h-[10rem] w-[10rem] object-cover mb-2 border-[2px] rounded-[0.5rem] p-4">
+              {cloudinaryLink && <img src={cloudinaryLink} alt="event image" />}
+            </div>
             <InputForm type="file" id="image" onChange={handlePictureChange} />
-            <button type="button" onClick={handleUpload}>
+            <button
+              className=" mt-2 px-4 py-2 rounded-[0.5rem] bg-black text-white border-[2px] border-black hover:bg-white hover:text-black"
+              type="button"
+              onClick={handleUpload}
+            >
               Upload
             </button>
             {imageError && <ErrorMessage>Image is required</ErrorMessage>}
