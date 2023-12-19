@@ -52,14 +52,14 @@ function User() {
                 <td className="p-[1rem]">{item.membership}</td>
                 <td className="p-[1rem] flex gap-3">
                   <button
-                    className="bg-black text-white hover:bg-white hover:text-white rounded-[0.5rem] w-24 h-10"
+                    className="bg-black border-[2px] border-black text-white hover:bg-white hover:text-black rounded-[0.5rem] w-24 h-10"
                     onClick={() => handleEditUser(item.id)}
                   >
                     Edit
                   </button>
                   <button
                     onClick={() => handleDeleteUser(item.id)}
-                    className="bg-black text-white hover:bg-white hover:text-white rounded-[0.5rem] w-24 h-10"
+                    className="bg-black border-[2px] border-black text-white hover:bg-white hover:text-black rounded-[0.5rem] w-24 h-10"
                   >
                     Delete
                   </button>
