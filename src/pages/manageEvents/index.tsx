@@ -1,18 +1,15 @@
 import PageTitle from "@/components/PageTitle";
+import useEvent from "@/hooks/useEvent";
 import { useFetch } from "@/hooks/useFetch";
-import { Event } from "@/types/types";
 import { API_URL } from "@/utils/API_URL";
 import { IDRFormat } from "@/utils/IDRFormat";
 import { useRouter } from "next/router";
-import useSWR from "swr";
+import { useEffect } from "react";
 
 function ManageEvents() {
   const { push } = useRouter();
-  const fetcher = (url: string) => fetch(url).then((res) => res.json());
-  const { data } = useSWR<Event[]>(`${API_URL}/events`, fetcher, {
-    refreshInterval: 1000,
-  });
-  const { fetchData } = useFetch();
+  const { data, getEvent } = useEvent(`${API_URL}/events`);
+  const { data: remainingData, fetchData } = useFetch();
   const handleDeleteEvent = (id: number) => {
     const URL = `${API_URL}/events/${id}`;
     const options = {
@@ -20,8 +17,19 @@ function ManageEvents() {
     };
     fetchData(URL, options);
   };
+
+  useEffect(() => {
+    if (remainingData !== null) {
+      getEvent();
+    }
+  }, [remainingData]);
+
   const handleAddEvent = () => {
     push("/manageEvents/addEvent");
+  };
+
+  const handleEditEvent = (id: number) => {
+    push(`/manageEvents/${id}`);
   };
   return (
     <div className="flex">
@@ -64,7 +72,7 @@ function ManageEvents() {
                 <td className="p-[1rem] flex gap-3">
                   <button
                     className="border-[2px] border-black bg-black text-white hover:bg-white hover:text-black rounded-[0.5rem] w-24 h-10"
-                    // onClick={() => handleEditEvent(item.id)}
+                    onClick={() => handleEditEvent(item.id)}
                   >
                     Edit
                   </button>
