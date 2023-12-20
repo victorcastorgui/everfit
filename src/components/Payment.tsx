@@ -72,10 +72,10 @@ const Payment = ({
     merchs.forEach((merch) => {
       totalMerchQty += merch.qty;
     });
-    merchs.forEach((merch) => {
-      totalMerchPrice += merch.price;
-    });
     setTotalQuantity(totalMerchQty);
+    merchs.forEach((merch) => {
+      totalMerchPrice += merch.qty * merch.price;
+    });
     setTotalMerchPrice(totalMerchPrice);
   };
 
