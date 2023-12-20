@@ -5,6 +5,7 @@ import PageTitle from "@/components/PageTitle";
 import useEvent from "@/hooks/useEvent";
 import { useFetch } from "@/hooks/useFetch";
 import { API_URL } from "@/utils/API_URL";
+import { DateTimeFormat } from "@/utils/DateTimeFormat";
 import { IDRFormat } from "@/utils/IDRFormat";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -145,7 +146,7 @@ function ManageEvents() {
               <tr className="border-[1px] border-black" key={item.id}>
                 <DataCell>{item.id}</DataCell>
                 <DataCell>{item.name}</DataCell>
-                <DataCell>{item.startTime}</DataCell>
+                <DataCell>{DateTimeFormat(item.startTime)}</DataCell>
                 <DataCell>{item.duration}</DataCell>
                 <DataCell>{IDRFormat.format(item.price as number)}</DataCell>
                 <DataCell>{item.category}</DataCell>
