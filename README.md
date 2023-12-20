@@ -40,3 +40,7 @@ json-server --watch db.json
 
 Open [http://localhost:8000](http://localhost:8000) with your browser to see the application.
 Open [http://localhost:3000](http://localhost:8000) with your browser to see the json-server data.
+
+## Access Live Application on Browser
+
+Open []() with your browser to see the live application running on browser.
