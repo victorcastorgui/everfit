@@ -148,7 +148,7 @@ function Profile() {
               <p>Email: {data?.email}</p>
             </Reveal>
             <Reveal>
-              <p>Membership: {data?.membership.toUpperCase()}</p>
+              <p>Membership: {data?.membership?.toUpperCase()}</p>
             </Reveal>
             <button
               onClick={() => setShowMemberModal(true)}
@@ -168,13 +168,18 @@ function Profile() {
         </button>
       </div>
       {topUpModal ? (
-        <TopUpModal setShowTopUpModal={setShowTopUpModal} data={data as User} />
+        <TopUpModal
+          setShowTopUpModal={setShowTopUpModal}
+          getProfile={getProfile}
+          data={data as User}
+        />
       ) : (
         <></>
       )}
       {memberModal ? (
         <ChangeMembership
           setShowMemberModal={setShowMemberModal}
+          getProfile={getProfile}
           data={data as User}
         />
       ) : (
