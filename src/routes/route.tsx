@@ -5,4 +5,9 @@ export const protectedRoutes = [
   "/bookmarks",
 ];
 export const publicRoutes = ["/home", "/events"];
-export const adminProtectedRoutes = ["/dashboard", "/manageEvents", "/users"];
+export const adminProtectedRoutes = [
+  "/dashboard",
+  "/manageEvents",
+  "/users",
+  "/manageMerchandise",
+];
