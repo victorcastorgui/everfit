@@ -1,27 +1,65 @@
 import { useFetch } from "@/hooks/useFetch";
 import { User } from "@/types/types";
 import { API_URL } from "@/utils/API_URL";
-import Image from "next/image";
-import { SetStateAction, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
+import { KeyedMutator } from "swr";
 import CurrentPlan from "./CurrentPlan";
+import ErrorMessage from "./ErrorMessage";
+import SuccessfulTransaction from "./SuccessfulTransaction";
 
 function ChangeMembership({
   setShowMemberModal,
   data,
+  getProfile,
 }: {
   setShowMemberModal: React.Dispatch<SetStateAction<boolean>>;
   data: User;
+  getProfile: KeyedMutator<User>;
 }) {
   const [currentMembership, setCurrentMembership] = useState(false);
   const [membership, setMembership] = useState(data?.membership);
+  const [balanceError, setBalanceError] = useState(false);
   const [success, setSuccess] = useState(false);
-  const { fetchData } = useFetch<User>();
+  const [haveMembership, setHaveMembership] = useState(false);
+  const { data: updatedData, fetchData } = useFetch<User>();
   const handleCloseModal = () => {
     setSuccess(!success);
     setShowMemberModal(false);
   };
+
+  useEffect(() => {
+    if (updatedData !== null) {
+      getProfile();
+    }
+  }, [updatedData]);
+
+  useEffect(() => {
+    if (
+      data?.membership === "silver" ||
+      data?.membership === "gold" ||
+      data?.membership === "platinum"
+    ) {
+      setHaveMembership(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (haveMembership) {
+      setBalanceError(false);
+    } else if (membership === "silver" && (data?.balance as number) < 1000) {
+      setBalanceError(true);
+    } else if (membership === "gold" && (data?.balance as number) < 5000) {
+      setBalanceError(true);
+    } else if (membership === "platinum" && (data?.balance as number) < 10000) {
+      setBalanceError(true);
+    } else {
+      setBalanceError(false);
+    }
+  }, [membership]);
+
   const handleChangeMembership = () => {
     let changeMembership = 0;
+
     if (membership === "silver") {
       changeMembership = (data?.balance as number) - 1000;
     } else if (membership === "gold") {
@@ -43,7 +81,7 @@ function ChangeMembership({
     fetchData(URL, options);
     setSuccess(true);
   };
-  const hasError = currentMembership;
+  const hasError = currentMembership || haveMembership || balanceError;
   return (
     <div
       onClick={() => setShowMemberModal(false)}
@@ -54,25 +92,19 @@ function ChangeMembership({
         className="p-[2rem] w-[50%] m-auto bg-white justify-between rounded-[0.5rem]"
       >
         {success ? (
-          <div className="flex flex-col justify-center items-center">
-            <Image
-              src="/images/success.png"
-              width={300}
-              height={300}
-              alt="success image"
-            />
-            <h3>Top Up Successful!</h3>
-            <button onClick={handleCloseModal}>Click to close!</button>
-          </div>
+          <SuccessfulTransaction handleCloseModal={handleCloseModal}>
+            Change Membership Successful!
+          </SuccessfulTransaction>
         ) : (
           <>
-            <div className="flex gap-[1rem]">
+            <div className="flex gap-[1rem] justify-between">
               <CurrentPlan
                 setMembership={setMembership}
                 setCurrentMembership={setCurrentMembership}
                 data={data}
                 plan={"silver"}
                 discount={"10%"}
+                haveMembership={haveMembership}
               />
               <CurrentPlan
                 setMembership={setMembership}
@@ -80,6 +112,7 @@ function ChangeMembership({
                 data={data}
                 plan={"gold"}
                 discount={"15%"}
+                haveMembership={haveMembership}
               />
               <CurrentPlan
                 setMembership={setMembership}
@@ -87,11 +120,23 @@ function ChangeMembership({
                 data={data}
                 plan={"platinum"}
                 discount={"20%"}
+                haveMembership={haveMembership}
               />
             </div>
-            <button onClick={handleChangeMembership} disabled={hasError}>
-              Update Membership
-            </button>
+            {balanceError && (
+              <div className="mt-4 flex justify-center">
+                <ErrorMessage>Not enough balance</ErrorMessage>
+              </div>
+            )}
+            <div className="flex justify-center mt-8">
+              <button
+                className="bg-black rounded-[0.5rem] text-white border-[2px] border-black p-4 hover:bg-white hover:text-black disabled:bg-gray-500 disabled:cursor-not-allowed"
+                onClick={handleChangeMembership}
+                disabled={hasError}
+              >
+                Update Membership
+              </button>
+            </div>
           </>
         )}
       </div>
