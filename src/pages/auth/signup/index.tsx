@@ -52,7 +52,7 @@ const Register = () => {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      fullname: fullName,
+      name: fullName,
       email: email,
       password: password,
       role: "user",
