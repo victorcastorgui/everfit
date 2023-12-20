@@ -28,7 +28,7 @@ function AdminSideBar({
         <Link className="hover:text-gray-500" href="/manageEvents">
           Manage Events
         </Link>
-        <Link className="hover:text-gray-500" href="/merchandise">
+        <Link className="hover:text-gray-500" href="/manageMerch">
           Merchandise
         </Link>
         <Link className="hover:text-gray-500" href="/users">
