@@ -1,17 +1,25 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import AddButton from "@/components/AddButton";
 import DataCell from "@/components/DataCell";
+import InputForm from "@/components/InputForm";
 import PageTitle from "@/components/PageTitle";
 import { useFetch } from "@/hooks/useFetch";
 import useMerch from "@/hooks/useMerch";
 import { API_URL } from "@/utils/API_URL";
 import { IDRFormat } from "@/utils/IDRFormat";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function manageMerch() {
   const { push } = useRouter();
-  const { data, getMerch } = useMerch(`${API_URL}/merchs`);
+  const [search, setSearch] = useState("");
+  const [sort, setSort] = useState("");
+  const [order, setOrder] = useState("");
+  const { data, getMerch } = useMerch(
+    `${API_URL}/merchs?name_like=${search}&${sort && "_sort=" + sort}&${
+      order && "_order=" + order
+    }`
+  );
   const { data: remainingData, fetchData } = useFetch();
 
   const handleDeleteMerch = (id: number) => {
@@ -36,12 +44,67 @@ function manageMerch() {
     push("/manageMerch/addMerch");
   };
 
+  const [page, setPage] = useState(1);
+  const itemsPerPage = 5;
+  const startIndex = (page - 1) * itemsPerPage;
+  const displayedData = data?.slice(startIndex, startIndex + itemsPerPage);
+  const totalPages = Math.ceil((data?.length || 0) / itemsPerPage);
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+  };
+
   return (
     <div className="flex">
       <div className="w-[15%]"></div>
       <div className="w-[85%] h-screen flex flex-col items-center">
         <PageTitle>Manage Merchandise</PageTitle>
-        <AddButton handleFunction={handleAddMerch}>New Merch</AddButton>
+        <div className="flex justify-between items-end w-[90%]">
+          <div>
+            <label htmlFor="sort">Sort By:</label>
+            <select
+              className="w-full bg-white p-4 rounded-[0.5rem]"
+              id="sort"
+              defaultValue=""
+              onChange={(e) => {
+                setPage(1);
+                setSort(e.target.value);
+              }}
+            >
+              <option value={""}>All</option>
+              <option value="name">Name</option>
+              <option value="price">Price</option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="order">Order By:</label>
+            <select
+              className="w-full bg-white p-4 rounded-[0.5rem]"
+              id="order"
+              defaultValue=""
+              onChange={(e) => {
+                setPage(1);
+                setOrder(e.target.value);
+              }}
+            >
+              <option value={""}>All</option>
+              <option value="asc">Asc</option>
+              <option value="desc">Desc</option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="search">Search:</label>
+            <InputForm
+              type="text"
+              placeholder="Search event name..."
+              onChange={(e) => {
+                setPage(1);
+                setTimeout(() => setSearch(e.target.value), 500);
+              }}
+              id="search"
+            />
+          </div>
+          <AddButton handleFunction={handleAddMerch}>New Merch</AddButton>
+        </div>
         <table className="w-[90%] table-auto border-[2px] border-black rounded-[0.5rem] text-left mt-[2rem]">
           <thead>
             <tr className="border-b border-black bg-black text-white">
@@ -55,7 +118,7 @@ function manageMerch() {
             </tr>
           </thead>
           <tbody>
-            {data?.map((item, index) => (
+            {displayedData?.map((item, index) => (
               <tr className="border-[1px] border-black" key={index}>
                 <DataCell>{item.id}</DataCell>
                 <DataCell>{item.name}</DataCell>
@@ -81,6 +144,31 @@ function manageMerch() {
             ))}
           </tbody>
         </table>
+        <div className="flex justify-center mt-8">
+          <button
+            className="disabled:cursor-not-allowed border-[2px] border-black bg-black text-white p-[0.5rem] rounded-[0.5rem] hover:bg-white hover:text-black disabled:bg-gray-500"
+            disabled={page === 1}
+            onClick={() => handlePageChange(page - 1)}
+          >
+            {"<"}
+          </button>
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+              key={index + 1}
+              onClick={() => handlePageChange(index + 1)}
+              className="bg-black border-[2px] border-black text-white p-[0.5rem] rounded-[0.5rem] hover:bg-white hover:text-black disabled:bg-gray-500"
+            >
+              {index + 1}
+            </button>
+          ))}
+          <button
+            className="disabled:cursor-not-allowed  bg-black border-[2px] border-black text-white p-[0.5rem] rounded-[0.5rem] hover:bg-white hover:text-black disabled:bg-gray-500"
+            disabled={page === totalPages}
+            onClick={() => handlePageChange(page + 1)}
+          >
+            {">"}
+          </button>
+        </div>
       </div>
     </div>
   );
