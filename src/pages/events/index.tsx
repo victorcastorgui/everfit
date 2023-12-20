@@ -34,49 +34,62 @@ function Events() {
       <div className="text-center">
         <PageTitle>Events</PageTitle>
       </div>
-      <div className="w-[85%] m-auto">
-        <InputForm
-          type="text"
-          placeholder="Search event name..."
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <label htmlFor="category">Category:</label>
-        <select
-          id="category"
-          defaultValue=""
-          onChange={(e) => setCategory(e.target.value)}
-        >
-          <option value={""}>All</option>
-          <option value="marathon">Marathon</option>
-          <option value="yoga">Yoga</option>
-          <option value="cycling">cycling</option>
-          <option value="martial art">Martial Art</option>
-          <option value="swimming">Swimming</option>
-          <option value="sacket sports">Racket Sports</option>
-          <option value="football">Football</option>
-        </select>
-        <label htmlFor="sort">Sort By:</label>
-        <select
-          id="sort"
-          defaultValue=""
-          onChange={(e) => setSort(e.target.value)}
-        >
-          <option value={""}>All</option>
-          <option value="name">Name</option>
-          <option value="price">Price</option>
-          <option value="duration">Duration</option>
-          <option value="date">Date</option>
-        </select>
-        <label htmlFor="order">Order By:</label>
-        <select
-          id="order"
-          defaultValue=""
-          onChange={(e) => setOrder(e.target.value)}
-        >
-          <option value={""}>All</option>
-          <option value="asc">Asc</option>
-          <option value="desc">Desc</option>
-        </select>
+      <div className="w-[85%] m-auto flex justify-between max-[1000px]:grid max-[1000px]:grid-cols-2 max-[1000px]:gap-x-[1rem]">
+        <div>
+          <label htmlFor="category">Category:</label>
+          <select
+            className="w-full bg-white p-4 rounded-[0.5rem]"
+            id="category"
+            defaultValue=""
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            <option value={""}>All</option>
+            <option value="marathon">Marathon</option>
+            <option value="yoga">Yoga</option>
+            <option value="cycling">cycling</option>
+            <option value="martial art">Martial Art</option>
+            <option value="swimming">Swimming</option>
+            <option value="sacket sports">Racket Sports</option>
+            <option value="football">Football</option>
+          </select>
+        </div>
+        <div>
+          <label htmlFor="sort">Sort By:</label>
+          <select
+            className="w-full bg-white p-4 rounded-[0.5rem]"
+            id="sort"
+            defaultValue=""
+            onChange={(e) => setSort(e.target.value)}
+          >
+            <option value={""}>All</option>
+            <option value="name">Name</option>
+            <option value="price">Price</option>
+            <option value="duration">Duration</option>
+            <option value="date">Date</option>
+          </select>
+        </div>
+        <div>
+          <label htmlFor="order">Order By:</label>
+          <select
+            className="w-full bg-white p-4 rounded-[0.5rem]"
+            id="order"
+            defaultValue=""
+            onChange={(e) => setOrder(e.target.value)}
+          >
+            <option value={""}>All</option>
+            <option value="asc">Asc</option>
+            <option value="desc">Desc</option>
+          </select>
+        </div>
+        <div>
+          <label htmlFor="search">Search:</label>
+          <InputForm
+            type="text"
+            placeholder="Search event name..."
+            onChange={(e) => setSearch(e.target.value)}
+            id="search"
+          />
+        </div>
       </div>
       <div className="w-[85%] m-auto mt-[2rem] grid grid-cols-4 max-[1200px]:grid-cols-3 max-[800px]:grid-cols-2 max-[600px]:grid-cols-1 gap-x-[2rem] gap-y-[3rem] ">
         {data?.map((item) => (
