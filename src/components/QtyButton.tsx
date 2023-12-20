@@ -1,5 +1,8 @@
+import { decrement, increment } from "@/stores/merchandise/merchandiseSlice";
+import { RootState } from "@/stores/store";
 import { Merch, Purchase } from "@/types/types";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 function QtyButton({
   setPurchaseData,
@@ -10,7 +13,11 @@ function QtyButton({
   item: Merch;
   purchaseData: Purchase;
 }) {
-  const [qty, setQty] = useState(0);
+  const qty = useSelector((state: RootState) => state.counter.value);
+  useEffect(() => {
+    updatePurchasedData(qty);
+  }, [qty]);
+  const dispatch = useDispatch();
   const updatePurchasedData = (newQty: number) => {
     const updatedMerchs = purchaseData.merchs.map((merch) => {
       if (merch.id === item.id) {
@@ -43,9 +50,7 @@ function QtyButton({
       <button
         className="flex justify-center items-center bg-black disabled:bg-gray-500 text-[1.5rem] text-white rounded-[0.5rem] w-8 h-8"
         onClick={() => {
-          const newQty = qty - 1;
-          setQty(newQty);
-          updatePurchasedData(newQty);
+          dispatch(decrement());
         }}
         disabled={qty <= 0}
       >
@@ -55,9 +60,7 @@ function QtyButton({
       <button
         className="flex justify-center items-center bg-black disabled:bg-gray-500 text-white text-[1.5rem] rounded-[0.5rem] w-8 h-8"
         onClick={() => {
-          const newQty = qty + 1;
-          setQty(newQty);
-          updatePurchasedData(newQty);
+          dispatch(increment());
         }}
         disabled={qty >= item.stock!}
       >
