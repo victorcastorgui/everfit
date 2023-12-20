@@ -17,12 +17,12 @@ export interface Bookmarks {
 
 export interface Merch {
   id: number;
+  name: string;
   desc: string;
   price: number;
-  name: string;
+  stock?: number;
   image: string;
   eventId: number;
-  stock?: number;
   qty: number;
 }
 
