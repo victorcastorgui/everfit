@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import BackPage from "@/components/BackPage";
 import ErrorMessage from "@/components/ErrorMessage";
 import InputForm from "@/components/InputForm";
 import PageTitle from "@/components/PageTitle";
@@ -170,6 +171,9 @@ function EditEvent() {
       <div className="w-[15%]"></div>
       <div className="w-[85%] flex flex-col items-center">
         <PageTitle>Add Event</PageTitle>
+        <div className="flex w-[80%] mb-4">
+          <BackPage props={() => push("/manageEvents")} />
+        </div>
         <form
           className="mb-[2rem] rounded-[0.5rem] w-[80%] flex flex-col gap-[1rem]"
           onSubmit={(e) => updateJsonServer(e)}
