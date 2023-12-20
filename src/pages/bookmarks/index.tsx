@@ -28,6 +28,15 @@ function Bookmarks() {
   );
   const { data: remainingData, fetchData } = useFetch();
 
+  const [page, setPage] = useState(1);
+  const itemsPerPage = 5;
+  const startIndex = (page - 1) * itemsPerPage;
+  const displayedData = data?.slice(startIndex, startIndex + itemsPerPage);
+  const totalPages = Math.ceil((data?.length || 0) / itemsPerPage);
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+  };
+
   useEffect(() => {
     if (remainingData !== null) {
       mutate();
@@ -55,7 +64,7 @@ function Bookmarks() {
             <p>Bookmarks is empty</p>
           ) : (
             <div className="flex flex-col gap-5">
-              {data?.map((item) => (
+              {displayedData?.map((item) => (
                 <div
                   className="border-[2px] rounded-[0.5rem] bg-black grid p-[1rem] justify-between items-center max-[800px]:gap-8 max-[800px]:grid-cols-1 grid-cols-[2fr_1fr_1fr] gap-10 place-items-center"
                   key={item.id}
@@ -93,6 +102,31 @@ function Bookmarks() {
               ))}
             </div>
           )}
+        </div>
+        <div className="flex justify-center mt-8">
+          <button
+            className="disabled:cursor-not-allowed border-[2px] border-black bg-black text-white p-[0.5rem] rounded-[0.5rem] hover:bg-white hover:text-black disabled:bg-gray-500"
+            disabled={page === 1}
+            onClick={() => handlePageChange(page - 1)}
+          >
+            {"<"}
+          </button>
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+              key={index + 1}
+              onClick={() => handlePageChange(index + 1)}
+              className="bg-black border-[2px] border-black text-white p-[0.5rem] rounded-[0.5rem] hover:bg-white hover:text-black disabled:bg-gray-500"
+            >
+              {index + 1}
+            </button>
+          ))}
+          <button
+            className="disabled:cursor-not-allowed  bg-black border-[2px] border-black text-white p-[0.5rem] rounded-[0.5rem] hover:bg-white hover:text-black disabled:bg-gray-500"
+            disabled={page === totalPages}
+            onClick={() => handlePageChange(page + 1)}
+          >
+            {">"}
+          </button>
         </div>
       </div>
     </>

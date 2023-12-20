@@ -5,6 +5,7 @@ import { IDRFormat } from "@/utils/IDRFormat";
 import Reveal from "@/utils/Reveal";
 import Cookies from "js-cookie";
 import router from "next/router";
+import { useState } from "react";
 import useSWR from "swr";
 
 interface PurchaseHistory {
@@ -31,10 +32,19 @@ function History() {
     router.push(`/history/${id}`);
   };
 
+  const [page, setPage] = useState(1);
+  const itemsPerPage = 5;
+  const startIndex = (page - 1) * itemsPerPage;
+  const displayedData = data?.slice(startIndex, startIndex + itemsPerPage);
+  const totalPages = Math.ceil((data?.length || 0) / itemsPerPage);
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+  };
+
   return (
     <div className="w-[85%] m-auto mt-[2rem] min-h-[60vh]">
       <h2 className="text-center text-[2rem]">Purchase History</h2>
-      {data?.map((item) => (
+      {displayedData?.map((item) => (
         <Reveal key={item.id}>
           <div
             onClick={() => handleDetail(item.id)}
@@ -59,6 +69,31 @@ function History() {
           </div>
         </Reveal>
       ))}
+      <div className="flex justify-center mt-8">
+        <button
+          className="disabled:cursor-not-allowed border-[2px] border-black bg-black text-white p-[0.5rem] rounded-[0.5rem] hover:bg-white hover:text-black disabled:bg-gray-500"
+          disabled={page === 1}
+          onClick={() => handlePageChange(page - 1)}
+        >
+          {"<"}
+        </button>
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index + 1}
+            onClick={() => handlePageChange(index + 1)}
+            className="bg-black border-[2px] border-black text-white p-[0.5rem] rounded-[0.5rem] hover:bg-white hover:text-black disabled:bg-gray-500"
+          >
+            {index + 1}
+          </button>
+        ))}
+        <button
+          className="disabled:cursor-not-allowed  bg-black border-[2px] border-black text-white p-[0.5rem] rounded-[0.5rem] hover:bg-white hover:text-black disabled:bg-gray-500"
+          disabled={page === totalPages}
+          onClick={() => handlePageChange(page + 1)}
+        >
+          {">"}
+        </button>
+      </div>
     </div>
   );
 }

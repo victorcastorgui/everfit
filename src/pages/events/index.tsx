@@ -29,6 +29,16 @@ function Events() {
   const handleDetail = (id: number) => {
     router.push(`/events/${id}`);
   };
+
+  const [page, setPage] = useState(1);
+  const itemsPerPage = 12;
+  const startIndex = (page - 1) * itemsPerPage;
+  const displayedData = data?.slice(startIndex, startIndex + itemsPerPage);
+  const totalPages = Math.ceil((data?.length || 0) / itemsPerPage);
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+  };
+  
   return (
     <div>
       <div className="text-center">
@@ -41,7 +51,10 @@ function Events() {
             className="w-full bg-white p-4 rounded-[0.5rem]"
             id="category"
             defaultValue=""
-            onChange={(e) => setCategory(e.target.value)}
+            onChange={(e) => {
+              setPage(1);
+              setCategory(e.target.value);
+            }}
           >
             <option value={""}>All</option>
             <option value="marathon">Marathon</option>
@@ -59,7 +72,10 @@ function Events() {
             className="w-full bg-white p-4 rounded-[0.5rem]"
             id="sort"
             defaultValue=""
-            onChange={(e) => setSort(e.target.value)}
+            onChange={(e) => {
+              setPage(1);
+              setSort(e.target.value);
+            }}
           >
             <option value={""}>All</option>
             <option value="name">Name</option>
@@ -74,7 +90,10 @@ function Events() {
             className="w-full bg-white p-4 rounded-[0.5rem]"
             id="order"
             defaultValue=""
-            onChange={(e) => setOrder(e.target.value)}
+            onChange={(e) => {
+              setPage(1);
+              setOrder(e.target.value);
+            }}
           >
             <option value={""}>All</option>
             <option value="asc">Asc</option>
@@ -86,13 +105,16 @@ function Events() {
           <InputForm
             type="text"
             placeholder="Search event name..."
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => {
+              setPage(1);
+              setTimeout(() => setSearch(e.target.value), 500);
+            }}
             id="search"
           />
         </div>
       </div>
       <div className="w-[85%] m-auto mt-[2rem] grid grid-cols-4 max-[1200px]:grid-cols-3 max-[800px]:grid-cols-2 max-[600px]:grid-cols-1 gap-x-[2rem] gap-y-[3rem] ">
-        {data?.map((item) => (
+        {displayedData?.map((item) => (
           <Reveal key={item.id}>
             <div className="bg-black border-[3px] border-black rounded-[0.5rem] text-white w-[100%] text-center hover:shadow-2xl">
               <div className="h-[15rem] rounded-[0.5rem] object-contain relative">
@@ -120,6 +142,31 @@ function Events() {
             </div>
           </Reveal>
         ))}
+      </div>
+      <div className="flex justify-center mt-8">
+        <button
+          className="disabled:cursor-not-allowed border-[2px] border-black bg-black text-white p-[0.5rem] rounded-[0.5rem] hover:bg-white hover:text-black disabled:bg-gray-500"
+          disabled={page === 1}
+          onClick={() => handlePageChange(page - 1)}
+        >
+          {"<"}
+        </button>
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index + 1}
+            onClick={() => handlePageChange(index + 1)}
+            className="bg-black border-[2px] border-black text-white p-[0.5rem] rounded-[0.5rem] hover:bg-white hover:text-black disabled:bg-gray-500"
+          >
+            {index + 1}
+          </button>
+        ))}
+        <button
+          className="disabled:cursor-not-allowed  bg-black border-[2px] border-black text-white p-[0.5rem] rounded-[0.5rem] hover:bg-white hover:text-black disabled:bg-gray-500"
+          disabled={page === totalPages}
+          onClick={() => handlePageChange(page + 1)}
+        >
+          {">"}
+        </button>
       </div>
     </div>
   );
