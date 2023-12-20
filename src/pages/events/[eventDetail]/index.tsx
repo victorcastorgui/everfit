@@ -1,23 +1,42 @@
 /* eslint-disable @next/next/no-img-element */
 import BackPage from "@/components/BackPage";
 import PageTitle from "@/components/PageTitle";
+import { Purchase } from "@/types/types";
 import { API_URL } from "@/utils/API_URL";
 import { IDRFormat } from "@/utils/IDRFormat";
 import Reveal from "@/utils/Reveal";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import useSWR from "swr";
 
 function DetailPage() {
   const { push, query } = useRouter();
+  const [participantsCount, setParticipantsCount] = useState(0);
   const eventId = query.eventDetail;
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
   const { data } = useSWR(`${API_URL}/events/${eventId}`, fetcher);
   const handleBackPage = () => {
     push("/events");
   };
+  const { data: participantsData } = useSWR<Purchase[]>(
+    `${API_URL}/purchases`,
+    fetcher
+  );
   const handlePurchase = () => {
     push(`/purchase/${eventId}`);
   };
+
+  useEffect(() => {
+    let count = 0;
+    participantsData?.forEach((item) => {
+      if (item.eventId === parseInt(eventId as string)) {
+        count += 1;
+      }
+    });
+    setParticipantsCount(count);
+  }, [participantsData, data]);
+
+  const hasError = participantsCount === data?.capacity;
 
   return (
     <div>
@@ -40,7 +59,9 @@ function DetailPage() {
                 <p>Duration: {data?.duration}</p>
                 <p>Category: {data?.category}</p>
                 <p>Price: {IDRFormat.format(data?.price)}</p>
-                <p>Capacity: {data?.capacity}</p>
+                <p>
+                  Capacity: {participantsCount}/{data?.capacity}
+                </p>
               </div>
             </Reveal>
           </div>
@@ -54,7 +75,8 @@ function DetailPage() {
       <div className="flex w-[85%] m-auto justify-end mt-[2rem]">
         <button
           onClick={handlePurchase}
-          className="bg-black rounded-[0.5rem] p-[0.5rem] text-white"
+          className="bg-black rounded-[0.5rem] p-[0.5rem] text-white disabled:cursor-not-allowed disabled:bg-gray-500"
+          disabled={hasError}
         >
           Buy Ticket
         </button>
