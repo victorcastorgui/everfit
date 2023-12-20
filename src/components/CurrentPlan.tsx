@@ -31,21 +31,21 @@ function CurrentPlan({
       {currentPlan ? (
         <div
           onClick={() => setCurrentMembership(true)}
-          className="bg-white border-[2px] border-black rounded-[0.5rem] p-[1rem] text-center"
+          className="bg-white border-[2px] border-black rounded-[0.5rem] p-[1rem] text-center cursor-pointer disabled:cursor-not-allowed"
         >
-          <h2 className="text-red-600">Your Current Plan</h2>
-          <h3>{plan.toUpperCase()}</h3>
-          <p>Get {discount} Discount</p>
-          <p>In all of your purchase</p>
+          <h2 className="text-red-500">Your Plan</h2>
+          <h3 className="text-[1.5rem]">{plan.toUpperCase()}</h3>
+          <p className="mt-[1rem]">Get {discount} Discount</p>
+          <p className="mt-[1rem]">In all of your purchase</p>
         </div>
       ) : (
         <div
           onClick={handleMembership}
-          className="bg-black rounded-[0.5rem] p-[1rem] text-center text-white"
+          className="bg-black rounded-[0.5rem] p-[1rem] text-center text-white cursor-pointer disabled:cursor-not-allowed"
         >
-          <h3>{plan.toUpperCase()}</h3>
-          <p>Get {discount} Discount</p>
-          <p>In all of your purchase</p>
+          <h3 className="text-[1.5rem]">{plan.toUpperCase()}</h3>
+          <p className="mt-[1rem]">Get {discount} Discount</p>
+          <p className="mt-[1rem]">In all of your purchase</p>
         </div>
       )}
     </>
