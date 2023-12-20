@@ -4,6 +4,7 @@ import InputForm from "@/components/InputForm";
 import PageTitle from "@/components/PageTitle";
 import { Event } from "@/types/types";
 import { API_URL } from "@/utils/API_URL";
+import { DateTimeFormat } from "@/utils/DateTimeFormat";
 import { IDRFormat } from "@/utils/IDRFormat";
 import Reveal from "@/utils/Reveal";
 import Cookie from "js-cookie";
@@ -38,7 +39,7 @@ function Events() {
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
   };
-  
+
   return (
     <div>
       <div className="text-center">
@@ -129,7 +130,7 @@ function Events() {
               </div>
               <div className="w-[90%] m-auto">
                 <h2 className="text-[1.5rem] mt-[1rem]">{item.name}</h2>
-                <p className="mt-[0.5rem]">{item.startTime}</p>
+                <p className="mt-[0.5rem]">{DateTimeFormat(item.startTime)}</p>
                 <p className="mt-[0.5rem]">{IDRFormat.format(item.price)}</p>
                 <p className="my-[0.5rem] truncate">{item.description}</p>
                 <button
