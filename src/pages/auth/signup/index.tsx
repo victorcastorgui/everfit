@@ -57,6 +57,7 @@ const Register = () => {
       password: password,
       role: "user",
       balance: 0,
+      image: "https://www.svgrepo.com/show/452030/avatar-default.svg",
     }),
   };
 
