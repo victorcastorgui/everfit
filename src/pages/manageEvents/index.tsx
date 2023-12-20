@@ -57,7 +57,7 @@ function ManageEvents() {
       <div className="w-[15%]"></div>
       <div className="w-[85%] h-screen flex flex-col items-center">
         <PageTitle>Events</PageTitle>
-        <div className="flex justify-between items-start w-[90%]">
+        <div className="flex justify-between items-end w-[90%]">
           <div>
             <label htmlFor="category">Category:</label>
             <select
