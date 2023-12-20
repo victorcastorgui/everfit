@@ -4,6 +4,18 @@ An application for sport events. Client can see events, buy ticket, save to book
 
 When signing up, user will automatically be assigned with a user role. To become an admin, user must edit the role in admin, assuming that admin role assigning can only be edited or added by engineers.
 
+## Technologies
+
+- NextJs
+- TypeScript
+- ESLint
+- daisyUI
+- json-server
+- js-cookie
+- framer-motion
+- tailwind
+- core-ui react-chartjs
+
 ## Getting Started
 
 First, install all the technologies used to build the application:
@@ -24,7 +36,7 @@ Third, run the json-server:
 json-server --watch db.json
 ```
 
-### Access Application
+## Access Application
 
 Open [http://localhost:8000](http://localhost:8000) with your browser to see the application.
 Open [http://localhost:3000](http://localhost:8000) with your browser to see the json-server data.
