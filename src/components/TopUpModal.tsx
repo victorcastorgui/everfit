@@ -3,21 +3,31 @@ import { User } from "@/types/types";
 import { API_URL } from "@/utils/API_URL";
 import Image from "next/image";
 import React, { SetStateAction, useEffect, useState } from "react";
+import { KeyedMutator } from "swr";
 import ErrorMessage from "./ErrorMessage";
+import SuccessfulTransaction from "./SuccessfulTransaction";
 
 function TopUpModal({
   setShowTopUpModal,
   data,
+  getProfile,
 }: {
   setShowTopUpModal: React.Dispatch<SetStateAction<boolean>>;
   data: User;
+  getProfile: KeyedMutator<User>;
 }) {
-  const { fetchData } = useFetch<User>();
+  const { data: updatedData, fetchData } = useFetch<User>();
   const [amount, setAmount] = useState("");
   const [pin, setPin] = useState("");
   const [success, setSuccess] = useState(false);
   const [showAmountErr, setShowAmountErr] = useState(false);
   const [showPinErr, setShowPinErr] = useState(false);
+
+  useEffect(() => {
+    if (updatedData !== null) {
+      getProfile();
+    }
+  });
 
   useEffect(() => {
     if (
@@ -73,16 +83,9 @@ function TopUpModal({
         className="p-[2rem] w-[50%] m-auto bg-white justify-between rounded-[0.5rem]"
       >
         {success ? (
-          <div className="flex flex-col justify-center items-center">
-            <Image
-              src="/images/success.png"
-              width={300}
-              height={300}
-              alt="success image"
-            />
-            <h3>Top Up Successful!</h3>
-            <button onClick={handleCloseModal}>Click to close!</button>
-          </div>
+          <SuccessfulTransaction handleCloseModal={handleCloseModal}>
+          Top Up Succesful!
+        </SuccessfulTransaction>
         ) : (
           <form
             onSubmit={handleSubmit}
@@ -98,7 +101,7 @@ function TopUpModal({
               id="source"
               className="bg-white border-[2px] h-[3rem] border-black text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5"
             >
-              <option selected>Source of funds</option>
+              <option value={""}>Source of funds</option>
               <option value="gopay">GoPay</option>
               <option value="virtual account">Virtual Account</option>
               <option value="ovo">OVO</option>
