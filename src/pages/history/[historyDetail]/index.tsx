@@ -21,6 +21,51 @@ interface PurchaseHistory {
   event: Event;
 }
 
+// interface PurchaseProps {
+//   data: PurchaseHistory;
+// }
+
+// export const getStaticPaths: GetStaticPaths = async () => {
+//   const response = await fetch(`${API_URL}/purchases`);
+//   const purchase: PurchaseHistory[] = await response.json();
+
+//   const paths = purchase.map((item) => {
+//     return {
+//       params: {
+//         id: item.id.toString(),
+//       },
+//     };
+//   });
+
+//   return { paths, fallback: true };
+// };
+
+// export const getStaticProps: GetStaticProps<PurchaseProps> = async (
+//   context
+// ) => {
+//   const orderId = context.params?.historyDetail;
+//   if (!orderId) {
+//     return { notFound: true };
+//   }
+//   const userId = Cookies.get("id");
+
+//   const response = await fetch(
+//     `${API_URL}/purchases/?id=${orderId}&&_expand=event&&userId=${userId}`
+//   );
+//   const data: PurchaseHistory = await response.json();
+
+//   if (!data) {
+//     return { notFound: true };
+//   }
+
+//   return {
+//     props: {
+//       data,
+//     },
+//     revalidate: 1,
+//   };
+// };
+
 function HistoryDetail() {
   const { push, query } = useRouter();
   const orderId = query.historyDetail;
@@ -52,7 +97,7 @@ function HistoryDetail() {
             </div>
             <div>
               <p>{IDRFormat.format(item.event.price)}</p>
-              {item.merchs.map((merch) => (
+              {item?.merchs.map((merch) => (
                 <div key={merch.id}>
                   <h4>{merch.name}</h4>
                   <p>
@@ -61,11 +106,11 @@ function HistoryDetail() {
                   </p>
                 </div>
               ))}
-              <p>Discount: {item.discount}%</p>
+              <p>Discount: {item?.discount}%</p>
               <p className="text-end">
                 Total Price:{" "}
                 <span className="text-[1.5rem]">
-                  {IDRFormat.format(item.paymentTotal)}
+                  {IDRFormat.format(item?.paymentTotal as number)}
                 </span>
               </p>
             </div>
