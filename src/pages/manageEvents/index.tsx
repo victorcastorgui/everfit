@@ -2,6 +2,7 @@ import AddButton from "@/components/AddButton";
 import DataCell from "@/components/DataCell";
 import InputForm from "@/components/InputForm";
 import PageTitle from "@/components/PageTitle";
+import ParticipantsModal from "@/components/ParticipantsModal";
 import useEvent from "@/hooks/useEvent";
 import { useFetch } from "@/hooks/useFetch";
 import { API_URL } from "@/utils/API_URL";
@@ -16,6 +17,7 @@ function ManageEvents() {
   const [category, setCategory] = useState("");
   const [sort, setSort] = useState("");
   const [order, setOrder] = useState("");
+  const [modal, setModal] = useState(false);
   const { data, getEvent } = useEvent(
     `${API_URL}/events?name_like=${search}&${
       category && "category=" + category
@@ -45,6 +47,7 @@ function ManageEvents() {
   };
 
   const [page, setPage] = useState(1);
+  const [eventId, setEventId] = useState<number | null>(null);
   const itemsPerPage = 5;
   const startIndex = (page - 1) * itemsPerPage;
   const displayedData = data?.slice(startIndex, startIndex + itemsPerPage);
@@ -52,6 +55,7 @@ function ManageEvents() {
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
   };
+  console.log(eventId);
 
   return (
     <div className="flex">
@@ -143,7 +147,14 @@ function ManageEvents() {
           </thead>
           <tbody>
             {displayedData?.map((item) => (
-              <tr className="border-[1px] border-black" key={item.id}>
+              <tr
+                onClick={() => {
+                  setModal(true);
+                  setEventId(item.id);
+                }}
+                className="border-[1px] border-black cursor-pointer"
+                key={item.id}
+              >
                 <DataCell>{item.id}</DataCell>
                 <DataCell>{item.name}</DataCell>
                 <DataCell>{DateTimeFormat(item.startTime)}</DataCell>
@@ -195,6 +206,11 @@ function ManageEvents() {
           </button>
         </div>
       </div>
+      {modal ? (
+        <ParticipantsModal setModal={setModal} data={eventId as number} />
+      ) : (
+        <></>
+      )}
     </div>
   );
 }
