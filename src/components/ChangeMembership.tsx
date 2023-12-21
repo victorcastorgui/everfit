@@ -104,7 +104,6 @@ function ChangeMembership({
                 data={data}
                 plan={"silver"}
                 discount={"10%"}
-                haveMembership={haveMembership}
               />
               <CurrentPlan
                 setMembership={setMembership}
@@ -112,7 +111,6 @@ function ChangeMembership({
                 data={data}
                 plan={"gold"}
                 discount={"15%"}
-                haveMembership={haveMembership}
               />
               <CurrentPlan
                 setMembership={setMembership}
@@ -120,7 +118,6 @@ function ChangeMembership({
                 data={data}
                 plan={"platinum"}
                 discount={"20%"}
-                haveMembership={haveMembership}
               />
             </div>
             {balanceError && (
