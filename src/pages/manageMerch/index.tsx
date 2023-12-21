@@ -95,7 +95,7 @@ function manageMerch() {
             <label htmlFor="search">Search:</label>
             <InputForm
               type="text"
-              placeholder="Search event name..."
+              placeholder="Search merch name..."
               onChange={(e) => {
                 setPage(1);
                 setTimeout(() => setSearch(e.target.value), 500);
