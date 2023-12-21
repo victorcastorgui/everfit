@@ -62,7 +62,7 @@ function ManageEvents() {
       <div className="w-[85%] h-screen flex flex-col items-center">
         <PageTitle>Events</PageTitle>
         <div className="flex justify-between items-end w-[90%]">
-          <div>
+          <div className="mt-[2rem]">
             <label htmlFor="category">Category:</label>
             <select
               className="w-full bg-white p-4 rounded-[0.5rem]"
