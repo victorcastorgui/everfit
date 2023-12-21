@@ -1,6 +1,6 @@
 import AuthRight from "@/components/AuthRight";
 import { useFetch } from "@/hooks/useFetch";
-import * as S from "@/pages/auth/login/style";
+import * as S from "@/components/loginStyle";
 import { User } from "@/types/types";
 import { API_URL } from "@/utils/API_URL";
 import Cookie from "js-cookie";

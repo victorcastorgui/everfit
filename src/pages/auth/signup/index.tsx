@@ -1,6 +1,6 @@
 import AuthRight from "@/components/AuthRight";
+import * as S from "@/components/signUpStyle";
 import { useFetch } from "@/hooks/useFetch";
-import * as S from "@/pages/auth/signup/style";
 import { API_URL } from "@/utils/API_URL";
 import { useRouter } from "next/router";
 import { useState } from "react";
