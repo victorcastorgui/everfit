@@ -1,46 +1,61 @@
 import PageTitle from "@/components/PageTitle";
+import { Purchase } from "@/types/types";
+import { API_URL } from "@/utils/API_URL";
+import { fetcher } from "@/utils/Fetcher";
 import { CChart } from "@coreui/react-chartjs";
+import useSWR from "swr";
 
 function Dashboard() {
+  const { data, isLoading } = useSWR(`${API_URL}/purchases`, fetcher);
+
+  const labels = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  const calculateProfitByMonth = (data: Purchase[]) => {
+    const arrData = Array(12).fill(0);
+
+    for (let i = 1; i <= 12; i++) {
+      for (const dataItem of data) {
+        if (new Date(dataItem.purchaseDate).getMonth() === i) {
+          arrData[i - 1] = arrData[i - 1] + dataItem.paymentTotal;
+        }
+      }
+    }
+    const calculateTotalProfit = arrData.reduce((sum, value) => sum + value, 0);
+
+    return { arrData, calculateTotalProfit };
+  };
+
   return (
     <div className="flex">
       <div className="w-[15%]"></div>
-      <div className="w-[85%] flex flex-col items-center border-[2px]">
+      <div className="w-[85%] h-screen flex flex-col items-center border-[2px]">
         <PageTitle>Dashboard</PageTitle>
-        <div className="w-[50rem] h-[50rem]">
+        <div className="w-[50rem]">
           <CChart
-            type="line"
+            type="bar"
             data={{
-              labels: [
-                "January",
-                "February",
-                "March",
-                "April",
-                "May",
-                "June",
-                "July",
-                "August",
-                "September",
-                "October",
-                "November",
-                "December",
-              ],
+              labels: labels,
               datasets: [
                 {
-                  label: "Event Earnings",
-                  backgroundColor: "rgba(220, 220, 220, 0.2)",
-                  borderColor: "rgba(220, 220, 220, 1)",
-                  pointBackgroundColor: "rgba(220, 220, 220, 1)",
-                  pointBorderColor: "#fff",
-                  data: [40, 20, 12, 39, 10, 40, 39, 80, 40],
-                },
-                {
-                  label: "Merch Earnings",
-                  backgroundColor: "rgba(151, 187, 205, 0.2)",
+                  label: "Total Earnings (Event + Merch)",
+                  backgroundColor: "rgba(151, 187, 205, 1)",
                   borderColor: "rgba(151, 187, 205, 1)",
                   pointBackgroundColor: "rgba(151, 187, 205, 1)",
                   pointBorderColor: "#fff",
-                  data: [50, 12, 28, 29, 7, 25, 12, 70, 60],
+                  data: !isLoading ? calculateProfitByMonth(data).arrData : [],
                 },
               ],
             }}
