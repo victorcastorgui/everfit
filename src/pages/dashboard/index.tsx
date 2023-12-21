@@ -1,12 +1,20 @@
+import Card from "@/components/Card";
 import PageTitle from "@/components/PageTitle";
 import { Purchase } from "@/types/types";
 import { API_URL } from "@/utils/API_URL";
 import { fetcher } from "@/utils/Fetcher";
+import { IDRFormat } from "@/utils/IDRFormat";
 import { CChart } from "@coreui/react-chartjs";
 import useSWR from "swr";
 
 function Dashboard() {
-  const { data, isLoading } = useSWR(`${API_URL}/purchases`, fetcher);
+  const { data, isLoading } = useSWR<Purchase[]>(
+    `${API_URL}/purchases`,
+    fetcher
+  );
+
+  const { data: merchList } = useSWR<Purchase[]>(`${API_URL}/merchs`, fetcher);
+  const { data: eventList } = useSWR<Purchase[]>(`${API_URL}/events`, fetcher);
 
   const labels = [
     "January",
@@ -33,17 +41,24 @@ function Dashboard() {
         }
       }
     }
-    const calculateTotalProfit = arrData.reduce((sum, value) => sum + value, 0);
-
-    return { arrData, calculateTotalProfit };
+    return { arrData };
   };
 
   return (
     <div className="flex">
       <div className="w-[15%]"></div>
-      <div className="w-[85%] h-screen flex flex-col items-center border-[2px]">
+      <div className="w-[85%] h-fit flex flex-col items-center border-[2px]">
         <PageTitle>Dashboard</PageTitle>
-        <div className="w-[50rem]">
+        <div className="flex w-[70%] gap-[1rem] justify-between mt-[4rem]">
+          <Card title={"Total Profit"}>
+            {IDRFormat.format(
+              data?.reduce((acc, curr) => acc + curr.paymentTotal, 0) as number
+            )}
+          </Card>
+          <Card title={"Total Merchandises"}>{merchList?.length}</Card>
+          <Card title={"Total Events"}>{eventList?.length}</Card>
+        </div>
+        <div className="w-[60rem] my-[4rem]">
           <CChart
             type="bar"
             data={{
@@ -55,7 +70,9 @@ function Dashboard() {
                   borderColor: "rgba(151, 187, 205, 1)",
                   pointBackgroundColor: "rgba(151, 187, 205, 1)",
                   pointBorderColor: "#fff",
-                  data: !isLoading ? calculateProfitByMonth(data).arrData : [],
+                  data: !isLoading
+                    ? calculateProfitByMonth(data as Purchase[]).arrData
+                    : [],
                 },
               ],
             }}
