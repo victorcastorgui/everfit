@@ -11,6 +11,7 @@ import Cookie from "js-cookie";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 interface Cloudinary {
   secure_url: string;
@@ -43,6 +44,7 @@ function Profile() {
     Cookie.remove("id");
     Cookie.remove("token");
     Cookie.remove("role");
+    toast.success("User is logged out");
     router.push("/auth/login");
   };
 

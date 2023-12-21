@@ -4,6 +4,7 @@ import * as S from "@/pages/auth/signup/style";
 import { API_URL } from "@/utils/API_URL";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { toast } from "sonner";
 
 const Register = () => {
   const router = useRouter();
@@ -75,6 +76,7 @@ const Register = () => {
     setFullName("");
     setPassword("");
     setConfirmPassword("");
+    toast.success("User created successfully");
     router.push("/auth/login");
   };
 

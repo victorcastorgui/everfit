@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "sonner";
 
 interface UseFetchResponse<T> {
   data: T | null;
@@ -30,6 +31,7 @@ export const useFetch = <T>(): UseFetchResponse<T> => {
       } else {
         setError(error as Error);
       }
+      toast.error("Error retrieving data");
       console.log(error);
     } finally {
       setIsLoading(false);

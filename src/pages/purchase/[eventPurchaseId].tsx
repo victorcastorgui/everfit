@@ -9,6 +9,7 @@ import { API_URL } from "@/utils/API_URL";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import useSWR from "swr";
 
 function EventPurchaseId() {
@@ -45,6 +46,8 @@ function EventPurchaseId() {
       body: JSON.stringify(purchaseData),
     };
     fetchData(URL, options);
+
+    toast.success("Order created successfully");
 
     const newBalance = userData.balance - purchaseData.paymentTotal;
 

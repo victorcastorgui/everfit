@@ -8,6 +8,7 @@ import Reveal from "@/utils/Reveal";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import useSWR from "swr";
 
 interface Bookmark {
@@ -49,6 +50,7 @@ function Bookmarks() {
       method: "DELETE",
     };
     fetchData(URL, options);
+    toast.success("Bookmark has been deleted");
   };
   const handleDetail = (eventId: number) => {
     push(`/events/${eventId}`);

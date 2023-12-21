@@ -9,6 +9,7 @@ import { API_URL } from "@/utils/API_URL";
 import { IDRFormat } from "@/utils/IDRFormat";
 import { useRouter } from "next/router";
 import { FormEvent, useEffect, useState } from "react";
+import { toast } from "sonner";
 import useSWR from "swr";
 
 interface Cloudinary {
@@ -154,6 +155,7 @@ function EditEvent() {
       body: JSON.stringify(eventData),
     };
     await fetchData(URL, options);
+    toast.success("Event update successful");
     push("/manageEvents");
   };
 

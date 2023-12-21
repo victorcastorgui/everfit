@@ -6,6 +6,7 @@ import { API_URL } from "@/utils/API_URL";
 import Cookie from "js-cookie";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 const Login = () => {
   const router = useRouter();
@@ -53,11 +54,14 @@ const Login = () => {
       Cookie.set("token", token());
       const role = Cookie.get("role");
       if (role === "admin") {
+        toast.success("Login successful");
         return router.push("/dashboard");
       }
+      toast.success("Login successful");
       return router.push("/home");
     }
 
+    toast.error("Login failed");
     setShowError(true);
     return;
   };

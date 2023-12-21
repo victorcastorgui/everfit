@@ -4,6 +4,7 @@ import { useFetch } from "@/hooks/useFetch";
 import { Bookmarks } from "@/types/types";
 import { API_URL } from "@/utils/API_URL";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 function BookmarkButton({
   eventId,
@@ -46,6 +47,7 @@ function BookmarkButton({
       }),
     };
     fetchData(URL, options);
+    toast.success("Bookmark has been added");
   };
 
   const handleDeleteBookmark = () => {
@@ -59,6 +61,7 @@ function BookmarkButton({
       method: "DELETE",
     };
     fetchData(URL, options);
+    toast.success("Bookmark has been deleted");
   };
   return (
     <>

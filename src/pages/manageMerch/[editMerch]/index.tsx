@@ -9,6 +9,7 @@ import { API_URL } from "@/utils/API_URL";
 import { IDRFormat } from "@/utils/IDRFormat";
 import { useRouter } from "next/router";
 import { FormEvent, useEffect, useState } from "react";
+import { toast } from "sonner";
 import useSWR from "swr";
 
 interface Cloudinary {
@@ -125,13 +126,14 @@ function EditMerch() {
 
   const updateMerch = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const URL = `${API_URL}/merchs`;
+    const URL = `${API_URL}/merchs/${merchId}`;
     const options = {
-      method: "POST",
+      method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(merchData),
     };
     await fetchData(URL, options);
+    toast.success("Merch update successful");
     push("/manageMerch");
   };
 

@@ -9,6 +9,7 @@ import { API_URL } from "@/utils/API_URL";
 import { IDRFormat } from "@/utils/IDRFormat";
 import { useRouter } from "next/router";
 import { FormEvent, useEffect, useState } from "react";
+import { toast } from "sonner";
 
 interface Cloudinary {
   secure_url: string;
@@ -125,6 +126,7 @@ function AddMerch() {
       }),
     };
     await fetchData(URL, options);
+    toast.success("Merch has been added");
     push("/manageMerch");
   };
 
