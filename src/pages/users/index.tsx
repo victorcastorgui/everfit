@@ -47,7 +47,7 @@ function User() {
   return (
     <div className="flex">
       <div className="w-[15%]"></div>
-      <div className="w-[85%] h-screen flex flex-col items-center">
+      <div className="w-[85%] h-fit flex flex-col items-center">
         <PageTitle>Users</PageTitle>
         <div className="flex justify-between items-end w-[90%]">
           <div>
