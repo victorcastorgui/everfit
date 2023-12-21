@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { Event, Merch } from "@/types/types";
 import { API_URL } from "@/utils/API_URL";
+import { fetcher } from "@/utils/Fetcher";
 import { IDRFormat } from "@/utils/IDRFormat";
 import Reveal from "@/utils/Reveal";
 import Cookies from "js-cookie";
@@ -21,7 +22,6 @@ interface PurchaseHistory {
 }
 
 function History() {
-  const fetcher = (url: string) => fetch(url).then((res) => res.json());
   const userId = Cookies.get("id");
   const { data } = useSWR<PurchaseHistory[]>(
     `${API_URL}/purchases?userId=${userId}&&_expand=event`,
