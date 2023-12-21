@@ -87,7 +87,7 @@ function User() {
             <label htmlFor="search">Search:</label>
             <InputForm
               type="text"
-              placeholder="Search event name..."
+              placeholder="Search user name..."
               onChange={(e) => {
                 setPage(1);
                 setTimeout(() => setSearch(e.target.value), 500);
