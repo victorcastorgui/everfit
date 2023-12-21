@@ -150,7 +150,7 @@ function ManageEvents() {
                   setModal(true);
                   setEventId(item.id);
                 }}
-                className="border-[1px] border-black cursor-pointer"
+                className="border-[1px] border-black cursor-pointer hover:bg-slate-400"
                 key={item.id}
               >
                 <DataCell>{item.id}</DataCell>
