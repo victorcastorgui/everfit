@@ -81,7 +81,7 @@ function Events() {
             <option value={""}>All</option>
             <option value="name">Name</option>
             <option value="price">Price</option>
-            <option value="date">Date</option>
+            <option value="startTime">Date</option>
           </select>
         </div>
         <div>
