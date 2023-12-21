@@ -2,6 +2,7 @@ import Cookies from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction } from "react";
+import { toast } from "sonner";
 import Logo from "./Logo";
 
 function AdminSideBar({
@@ -15,6 +16,7 @@ function AdminSideBar({
     Cookies.remove("id");
     Cookies.remove("token");
     setIsAdmin(false);
+    toast.success("Logout successful");
     push("/auth/login");
   };
 
