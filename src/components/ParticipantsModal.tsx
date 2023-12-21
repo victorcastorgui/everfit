@@ -38,15 +38,15 @@ function ParticipantsModal({
       <div className="w-[85%]">
         <div
           onClick={(e) => e.stopPropagation()}
-          className="p-[2rem] w-[50%] m-auto bg-white justify-between rounded-[0.5rem] overflow-y-auto"
+          className="p-[2rem] w-[50%] m-auto h-[45rem] bg-white justify-between rounded-[0.5rem] overflow-auto"
         >
           <h3 className="text-[1.5rem] text-center">Participants</h3>
-          <table className="table-auto border-[2px] border-black rounded-[0.5rem] text-left mt-[2rem] w-full">
+          <table className="table-auto border-[2px]  border-black rounded-[0.5rem] text-left mt-[2rem] w-full">
             <thead>
               <tr className="border-b border-black bg-black text-white">
-                <th className="p-[1rem] w-12">ID</th>
-                <th className="p-[1rem] w-40">Name</th>
-                <th className="p-[1rem] w-40">Payment Status</th>
+                <th className="p-[1rem] w-20">ID</th>
+                <th className="p-[1rem] w-30">Name</th>
+                <th className="p-[1rem] w-30">Payment Status</th>
               </tr>
             </thead>
             <tbody>
