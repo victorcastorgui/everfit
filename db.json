@@ -16,30 +16,30 @@
     },
     {
       "id": 3,
-      "name": "User",
+      "name": "User 123",
       "email": "user@gmail.com",
       "password": "user",
       "role": "user",
-      "balance": 1654000,
-      "membership": "platinum",
+      "balance": 7375400,
+      "membership": "gold",
       "image": "https://res.cloudinary.com/adminmatoa/image/upload/v1702547609/no4vh1qp82yokaw0t4hs.svg"
     },
     {
-      "id": 4,
-      "name": "Test 123",
-      "email": "test123@gmail.com",
-      "password": "user",
+      "name": "Victor Castor",
+      "email": "victorcastorgui@gmail.com",
+      "password": "victor",
       "role": "user",
-      "balance": 1654000,
-      "membership": "gold",
-      "image": "https://res.cloudinary.com/adminmatoa/image/upload/v1702547609/no4vh1qp82yokaw0t4hs.svg"
+      "balance": 35000,
+      "image": "https://www.svgrepo.com/show/452030/avatar-default.svg",
+      "id": 4,
+      "membership": "platinum"
     }
   ],
   "events": [
     {
       "id": 1,
       "name": "Color Run JKT",
-      "startTime": "8:00 AM",
+      "startTime": "2023-12-22T08:00",
       "duration": "3 Hours",
       "category": "marathon",
       "price": 250000,
@@ -50,7 +50,7 @@
     {
       "id": 2,
       "name": "Yoga Zen",
-      "startTime": "10:00 AM",
+      "startTime": "2023-12-22T09:00",
       "duration": "1.5 Hours",
       "category": "yoga",
       "price": 50000,
@@ -61,7 +61,7 @@
     {
       "id": 3,
       "name": "Rythm Ride",
-      "startTime": "12:00 PM",
+      "startTime": "2023-12-23T08:00",
       "duration": "1 Hour",
       "category": "cycling",
       "price": 80000,
@@ -72,7 +72,7 @@
     {
       "id": 4,
       "name": "Muay Thai",
-      "startTime": "13:00 PM",
+      "startTime": "2023-12-24T08:00",
       "duration": "1 Hour",
       "category": "martial art",
       "price": 100000,
@@ -83,9 +83,9 @@
     {
       "id": 5,
       "name": "Badminton Tournament",
-      "startTime": "8:00 AM",
+      "startTime": "2023-12-25T08:00",
       "duration": "5 Hours",
-      "category": "badminton",
+      "category": "racket sports",
       "price": 250000,
       "image": "https://cdnwpedutorenews.gramedia.net/wp-content/uploads/2022/09/11070505/sejarah-badminton1.jpg",
       "description": "A racquet sport played using racquets to hit a shuttlecock across a net. Although it may be played with larger teams, the most common forms of the game are singles and doubles.",
@@ -94,7 +94,7 @@
     {
       "id": 6,
       "name": "Swimming",
-      "startTime": "10:00 AM",
+      "startTime": "2023-12-26T08:00",
       "duration": "1.5 Hours",
       "category": "swimming",
       "price": 50000,
@@ -105,9 +105,9 @@
     {
       "id": 7,
       "name": "Futsal",
-      "startTime": "12:00 PM",
+      "startTime": "2023-12-27T08:00",
       "duration": "1 Hour",
-      "category": "futsal",
+      "category": "football",
       "price": 80000,
       "image": "https://awsimages.detik.net.id/community/media/visual/2023/10/09/ilustrasi-futsal.jpeg?w=1200",
       "description": "a football-based game played on a hardcourt like a basketball court, smaller than a football pitch, and mainly indoors. It has similarities to five-a-side football and indoor football. Futsal is played between two teams of five players each, one of whom is the goalkeeper.",
@@ -116,24 +116,13 @@
     {
       "id": 8,
       "name": "Tennis",
-      "startTime": "13:00 PM",
+      "startTime": "2023-12-28T08:00",
       "duration": "1 Hour",
-      "category": "tennis",
+      "category": "racket sports",
       "price": 100000,
       "image": "https://i.guim.co.uk/img/media/86ea7491d62964d3ae9737cb653b218a86c9e6a4/0_59_6800_4082/master/6800.jpg?width=1200&quality=85&auto=format&fit=max&s=d140116db0ae5b95f73c2cde59992521",
       "description": "a racket sport that is played either individually against a single opponent or between two teams of two players each. Each player uses a tennis racket that is strung with cord to strike a hollow rubber ball covered with felt over or around a net and into the opponent's court.",
       "capacity": 6
-    },
-    {
-      "name": "TEST 12345",
-      "startTime": "2023-12-19T11:50",
-      "duration": "1 Hour",
-      "category": "cycling",
-      "price": 1000000,
-      "image": "https://res.cloudinary.com/adminmatoa/image/upload/v1702961461/ol8vhnnjdc38koyt4mwq.png",
-      "description": "TEST 123 TEST 123 TEST 123",
-      "capacity": 100,
-      "id": 9
     }
   ],
   "bookmarks": [
@@ -146,16 +135,6 @@
       "userId": 3,
       "eventId": 2,
       "id": 2
-    },
-    {
-      "userId": 3,
-      "eventId": 2,
-      "id": 3
-    },
-    {
-      "userId": 3,
-      "eventId": 3,
-      "id": 4
     }
   ],
   "purchases": [
@@ -165,7 +144,7 @@
       "userId": 3,
       "paymentStatus": true,
       "paymentTotal": 1189000,
-      "purchaseDate": "",
+      "purchaseDate": "2023-11-20T12:26:17.355Z",
       "discount": 20,
       "merchs": [
         {
@@ -187,6 +166,76 @@
           "qty": 1
         }
       ]
+    },
+    {
+      "paymentTotal": 1078650,
+      "eventId": 3,
+      "purchaseDate": "2023-12-20T12:26:17.355Z",
+      "merchs": [
+        {
+          "id": 3,
+          "desc": "Women's Medium-Support High-Waisted Leggings with Pockets",
+          "price": 1189000,
+          "name": "Nike Universal",
+          "image": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/cda5c823-cecb-4226-8dea-b2a511060d30/universa-support-high-waisted-cropped-leggings-with-pockets-PKZjKw.png",
+          "eventId": 3,
+          "qty": 1
+        }
+      ],
+      "paymentStatus": true,
+      "discount": 15,
+      "userId": 3,
+      "id": 2
+    },
+    {
+      "paymentTotal": 1500000,
+      "eventId": 3,
+      "purchaseDate": "2023-1-20T12:26:17.355Z",
+      "merchs": [
+        {
+          "id": 3,
+          "desc": "Women's Medium-Support High-Waisted Leggings with Pockets",
+          "price": 1189000,
+          "name": "Nike Universal",
+          "image": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/cda5c823-cecb-4226-8dea-b2a511060d30/universa-support-high-waisted-cropped-leggings-with-pockets-PKZjKw.png",
+          "eventId": 3,
+          "qty": 1
+        }
+      ],
+      "paymentStatus": true,
+      "discount": 15,
+      "userId": 3,
+      "id": 3
+    },
+    {
+      "paymentTotal": 100000,
+      "eventId": 4,
+      "purchaseDate": "2023-12-20T13:05:05.393Z",
+      "merchs": [],
+      "paymentStatus": true,
+      "discount": 15,
+      "userId": 3,
+      "id": 4
+    },
+    {
+      "paymentTotal": 3099950,
+      "eventId": 3,
+      "purchaseDate": "2023-12-21T08:56:51.011Z",
+      "merchs": [
+        {
+          "id": 3,
+          "desc": "Women's Medium-Support High-Waisted Leggings with Pockets",
+          "price": 1189000,
+          "name": "Nike Universal",
+          "image": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/cda5c823-cecb-4226-8dea-b2a511060d30/universa-support-high-waisted-cropped-leggings-with-pockets-PKZjKw.png",
+          "eventId": 3,
+          "qty": 3
+        }
+      ],
+      "paymentStatus": true,
+      "discount": 15,
+      "userId": 3,
+      "id": 5
     }
   ],
   "merchs": [
