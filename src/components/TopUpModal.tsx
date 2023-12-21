@@ -84,8 +84,8 @@ function TopUpModal({
       >
         {success ? (
           <SuccessfulTransaction handleCloseModal={handleCloseModal}>
-          Top Up Succesful!
-        </SuccessfulTransaction>
+            Top Up Succesful!
+          </SuccessfulTransaction>
         ) : (
           <form
             onSubmit={handleSubmit}
