@@ -2,13 +2,12 @@ import InputForm from "@/components/InputForm";
 import PageTitle from "@/components/PageTitle";
 import { useFetch } from "@/hooks/useFetch";
 import useUser from "@/hooks/useUser";
-import { User } from "@/types/types";
 import { API_URL } from "@/utils/API_URL";
 import { IDRFormat } from "@/utils/IDRFormat";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-function User() {
+function Users() {
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
   const [order, setOrder] = useState("");
@@ -163,4 +162,4 @@ function User() {
   );
 }
 
-export default User;
+export default Users;
