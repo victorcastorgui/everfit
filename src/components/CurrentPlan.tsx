@@ -35,7 +35,7 @@ function CurrentPlan({
         >
           <h2 className="text-red-500">Your Plan</h2>
           <h3 className="text-[1.5rem]">{plan.toUpperCase()}</h3>
-          <p className="mt-[1rem]">Get {discount} Discount</p>
+          <p className="mt-[1rem]">Get {discount}% Discount</p>
           <p className="mt-[1rem]">In all of your purchase</p>
         </div>
       ) : (
@@ -44,7 +44,7 @@ function CurrentPlan({
           className="bg-black rounded-[0.5rem] p-[1rem] text-center text-white cursor-pointer disabled:cursor-not-allowed"
         >
           <h3 className="text-[1.5rem]">{plan.toUpperCase()}</h3>
-          <p className="mt-[1rem]">Get {discount} Discount</p>
+          <p className="mt-[1rem]">Get {discount}% Discount</p>
           <p className="mt-[1rem]">In all of your purchase</p>
         </div>
       )}
