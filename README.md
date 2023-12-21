@@ -1,6 +1,6 @@
 # EVERFIT
 
-An application for sport events. Client can see events, buy ticket, save to bookmark, buy merchandises, and see purchase history. Admin can add event, merchandise, and see monthly income. This application is built using NextJs with typescript and ESLint. The external libraries are daisyUI, json-server, js-cookie, framer-motion, tailwind, and core-ui react-chartjs.
+An application for sport events. Client can see events, buy ticket, save to bookmark, buy merchandises, and see purchase history. Admin can add event, merchandise, and see monthly income. This application is built using NextJs with typescript and ESLint. The external libraries are daisyUI, json-server, js-cookie, framer-motion, tailwind, core-ui react-chartjs, redux-toolkit, and sonner.
 
 When signing up, user will automatically be assigned with a user role. To become an admin, user must edit the role in admin, assuming that admin role assigning can only be edited or added by engineers.
 
@@ -15,6 +15,8 @@ When signing up, user will automatically be assigned with a user role. To become
 - framer-motion
 - tailwind
 - core-ui react-chartjs
+- redux-toolkit
+- sonner
 
 ## Getting Started
 
