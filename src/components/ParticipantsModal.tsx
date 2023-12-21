@@ -27,8 +27,6 @@ function ParticipantsModal({
     `${API_URL}/purchases?_expand=user&&eventId=${data}`,
     fetcher
   );
-  console.log(purchaseData);
-  console.log("data", data);
   return (
     <div
       onClick={() => setModal(false)}

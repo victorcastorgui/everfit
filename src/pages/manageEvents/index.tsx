@@ -55,7 +55,6 @@ function ManageEvents() {
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
   };
-  console.log(eventId);
 
   return (
     <div className="flex">
@@ -98,7 +97,6 @@ function ManageEvents() {
               <option value={""}>All</option>
               <option value="name">Name</option>
               <option value="price">Price</option>
-              <option value="duration">Duration</option>
               <option value="date">Date</option>
             </select>
           </div>
