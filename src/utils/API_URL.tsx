@@ -1,1 +1,1 @@
-export const API_URL = "https://json-everfit-86s8zbb10-victor-castors-projects.vercel.app";
+export const API_URL = "https://json-everfit-9vw5z1775-victor-castors-projects.vercel.app";
